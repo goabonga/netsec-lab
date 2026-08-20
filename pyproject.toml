@@ -39,6 +39,7 @@ netlab-tempest = { workspace = true }
 netlab-hw-implant = { workspace = true }
 netlab-dhcp = { workspace = true }
 netlab-arp = { workspace = true }
+netlab-macflood = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -59,6 +60,7 @@ dev = [
     "netlab-hw-implant",
     "netlab-dhcp",
     "netlab-arp",
+    "netlab-macflood",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

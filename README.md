@@ -47,6 +47,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-hw-implant` | L1 | Rogue hardware implant |
 | `netlab-dhcp` | L2 | DHCP snooping |
 | `netlab-arp` | L2 | ARP spoofing |
+| `netlab-macflood` | L2 | MAC flooding (CAM overflow) |
 
 ## Contributing
 
