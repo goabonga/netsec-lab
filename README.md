@@ -59,6 +59,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-icmp` | L3 | ICMP redirect & tunneling |
 | `netlab-frag` | L3 | Fragmentation & IDS evasion |
 | `netlab-routing` | L3 | Routing injection (RIP/OSPF) |
+| `netlab-igmp` | L3 | IGMP snooping / spoofing |
 
 ## Contributing
 
