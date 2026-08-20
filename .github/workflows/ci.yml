@@ -1681,6 +1681,51 @@ jobs:
           module: netlab_tls
           check: test
 
+  netlab-snmp-lint:
+    name: lint (netlab-snmp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-snmp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-snmp
+          module: netlab_snmp
+          check: lint
+
+  netlab-snmp-typecheck:
+    name: typecheck (netlab-snmp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-snmp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-snmp
+          module: netlab_snmp
+          check: typecheck
+
+  netlab-snmp-test:
+    name: test (netlab-snmp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-snmp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-snmp
+          module: netlab_snmp
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1794,6 +1839,9 @@ jobs:
       - netlab-tls-lint
       - netlab-tls-typecheck
       - netlab-tls-test
+      - netlab-snmp-lint
+      - netlab-snmp-typecheck
+      - netlab-snmp-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2992,6 +3040,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-tls)
           TAG="netlab-tls-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-snmp:
+    name: release (netlab-snmp)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-snmp')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-snmp
+        run: uv build --package netlab-snmp --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-snmp)
+          TAG="netlab-snmp-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
