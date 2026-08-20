@@ -38,3 +38,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-ids-evasion` | {{ config.extra.versions.netlab_ids_evasion }} |
 | `netlab-covert` | {{ config.extra.versions.netlab_covert }} |
 | `netlab-dns` | {{ config.extra.versions.netlab_dns }} |
+| `netlab-dnstunnel` | {{ config.extra.versions.netlab_dnstunnel }} |

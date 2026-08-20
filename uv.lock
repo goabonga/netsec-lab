@@ -17,6 +17,7 @@ members = [
     "netlab-dhcp",
     "netlab-discovery",
     "netlab-dns",
+    "netlab-dnstunnel",
     "netlab-evil-twin",
     "netlab-frag",
     "netlab-hw-implant",
@@ -757,6 +758,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-dnstunnel"
+version = "0.0.0"
+source = { editable = "packages/netlab-dnstunnel" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-evil-twin"
 version = "0.0.0"
 source = { editable = "packages/netlab-evil-twin" }
@@ -1253,6 +1274,7 @@ dev = [
     { name = "netlab-dhcp" },
     { name = "netlab-discovery" },
     { name = "netlab-dns" },
+    { name = "netlab-dnstunnel" },
     { name = "netlab-evil-twin" },
     { name = "netlab-frag" },
     { name = "netlab-hw-implant" },
@@ -1302,6 +1324,7 @@ dev = [
     { name = "netlab-dhcp", editable = "packages/netlab-dhcp" },
     { name = "netlab-discovery", editable = "packages/netlab-discovery" },
     { name = "netlab-dns", editable = "packages/netlab-dns" },
+    { name = "netlab-dnstunnel", editable = "packages/netlab-dnstunnel" },
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
     { name = "netlab-frag", editable = "packages/netlab-frag" },
     { name = "netlab-hw-implant", editable = "packages/netlab-hw-implant" },
