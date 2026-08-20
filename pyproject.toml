@@ -67,6 +67,7 @@ netlab-tls = { workspace = true }
 netlab-snmp = { workspace = true }
 netlab-ntp = { workspace = true }
 netlab-mdns-llmnr = { workspace = true }
+netlab-kerberos-net = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -115,6 +116,7 @@ dev = [
     "netlab-snmp",
     "netlab-ntp",
     "netlab-mdns-llmnr",
+    "netlab-kerberos-net",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
