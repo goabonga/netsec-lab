@@ -17,7 +17,7 @@ nav = [
     { "Methodology" = "methodology.md" },
     { 'Layer 1 - Physical' = [{ "Overview" = "layer-1-physical/index.md" }, { '802.11 passive reconnaissance' = "layer-1-physical/wifi-recon.md" }, { '802.11 deauthentication' = "layer-1-physical/wifi-deauth.md" }, { 'Evil twin / rogue AP' = "layer-1-physical/evil-twin.md" }, { 'WPA/WPA2 handshake & PMKID crack' = "layer-1-physical/wpa-crack.md" }, { 'WPS PIN brute force' = "layer-1-physical/wps-brute.md" }, { 'Passive network tapping' = "layer-1-physical/network-tapping.md" }, { 'TEMPEST / Van Eck emanations' = "layer-1-physical/tempest.md" }, { 'Rogue hardware implant' = "layer-1-physical/hardware-implant.md" }] },
     { 'Layer 2 - Data Link' = [{ "Overview" = "layer-2-link/index.md" }, { 'DHCP snooping' = "layer-2-link/dhcp.md" }, { 'ARP spoofing' = "layer-2-link/arp.md" }, { 'MAC flooding (CAM overflow)' = "layer-2-link/mac-flooding.md" }, { 'STP root takeover' = "layer-2-link/stp.md" }, { 'VLAN hopping' = "layer-2-link/vlan-hopping.md" }, { 'Rogue Router Advertisement (IPv6)' = "layer-2-link/ipv6-ra.md" }, { 'CDP/LLDP enumeration' = "layer-2-link/discovery-cdp-lldp.md" }, { 'LLDP-MED abuse' = "layer-2-link/lldp-med.md" }, { 'NAC bypass (802.1X)' = "layer-2-link/8021x.md" }, { 'MACsec / MKA' = "layer-2-link/macsec.md" }] },
-    { 'Layer 3 - Network' = [{ "Overview" = "layer-3-network/index.md" }, { 'IP spoofing' = "layer-3-network/ip-spoofing.md" }, { 'ICMP redirect & tunneling' = "layer-3-network/icmp.md" }, { 'Fragmentation & IDS evasion' = "layer-3-network/fragmentation.md" }, { 'Routing injection (RIP/OSPF)' = "layer-3-network/routing.md" }, { 'IGMP snooping / spoofing' = "layer-3-network/igmp-multicast.md" }] },
+    { 'Layer 3 - Network' = [{ "Overview" = "layer-3-network/index.md" }, { 'IP spoofing' = "layer-3-network/ip-spoofing.md" }, { 'ICMP redirect & tunneling' = "layer-3-network/icmp.md" }, { 'Fragmentation & IDS evasion' = "layer-3-network/fragmentation.md" }, { 'Routing injection (RIP/OSPF)' = "layer-3-network/routing.md" }, { 'IGMP snooping / spoofing' = "layer-3-network/igmp-multicast.md" }, { 'BGP hijack (simulated)' = "layer-3-network/bgp-hijack.md" }] },
     { "Versions" = "versions.md" },
 ]
 
@@ -89,3 +89,4 @@ netlab_icmp = "0.0.0"
 netlab_frag = "0.0.0"
 netlab_routing = "0.0.0"
 netlab_igmp = "0.0.0"
+netlab_bgp = "0.0.0"
