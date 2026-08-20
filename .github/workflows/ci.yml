@@ -676,6 +676,20 @@ jobs:
           path: packages/netlab-netflow
           module: netlab_netflow
 
+  netlab-pcap-forensics-check:
+    name: check (netlab-pcap-forensics)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-pcap-forensics')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-pcap-forensics
+          module: netlab_pcap_forensics
+
   release-bump:
     name: release-bump
     needs:
@@ -725,6 +739,7 @@ jobs:
       - netlab-ids-check
       - netlab-firewall-check
       - netlab-netflow-check
+      - netlab-pcap-forensics-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2179,6 +2194,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-netflow)
           TAG="netlab-netflow-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-pcap-forensics:
+    name: release (netlab-pcap-forensics)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-pcap-forensics')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-pcap-forensics
+        run: uv build --package netlab-pcap-forensics --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-pcap-forensics)
+          TAG="netlab-pcap-forensics-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
