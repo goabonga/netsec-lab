@@ -61,6 +61,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-routing` | L3 | Routing injection (RIP/OSPF) |
 | `netlab-igmp` | L3 | IGMP snooping / spoofing |
 | `netlab-bgp` | L3 | BGP hijack (simulated) (flagship) |
+| `netlab-vrrp-hsrp` | L3 | FHRP takeover (VRRP/HSRP) |
 
 ## Contributing
 

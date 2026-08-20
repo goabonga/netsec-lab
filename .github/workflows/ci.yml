@@ -410,6 +410,20 @@ jobs:
           path: packages/netlab-bgp
           module: netlab_bgp
 
+  netlab-vrrp-hsrp-check:
+    name: check (netlab-vrrp-hsrp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-vrrp-hsrp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-vrrp-hsrp
+          module: netlab_vrrp_hsrp
+
   release-bump:
     name: release-bump
     needs:
@@ -440,6 +454,7 @@ jobs:
       - netlab-routing-check
       - netlab-igmp-check
       - netlab-bgp-check
+      - netlab-vrrp-hsrp-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -1286,6 +1301,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-bgp)
           TAG="netlab-bgp-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-vrrp-hsrp:
+    name: release (netlab-vrrp-hsrp)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-vrrp-hsrp')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-vrrp-hsrp
+        run: uv build --package netlab-vrrp-hsrp --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-vrrp-hsrp)
+          TAG="netlab-vrrp-hsrp-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
