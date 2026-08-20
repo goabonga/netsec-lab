@@ -781,6 +781,51 @@ jobs:
           module: netlab_discovery
           check: test
 
+  netlab-lldp-med-lint:
+    name: lint (netlab-lldp-med)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-lldp-med')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-lldp-med
+          module: netlab_lldp_med
+          check: lint
+
+  netlab-lldp-med-typecheck:
+    name: typecheck (netlab-lldp-med)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-lldp-med')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-lldp-med
+          module: netlab_lldp_med
+          check: typecheck
+
+  netlab-lldp-med-test:
+    name: test (netlab-lldp-med)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-lldp-med')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-lldp-med
+          module: netlab_lldp_med
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -834,6 +879,9 @@ jobs:
       - netlab-discovery-lint
       - netlab-discovery-typecheck
       - netlab-discovery-test
+      - netlab-lldp-med-lint
+      - netlab-lldp-med-typecheck
+      - netlab-lldp-med-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -1392,6 +1440,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-discovery)
           TAG="netlab-discovery-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-lldp-med:
+    name: release (netlab-lldp-med)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-lldp-med')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-lldp-med
+        run: uv build --package netlab-lldp-med --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-lldp-med)
+          TAG="netlab-lldp-med-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

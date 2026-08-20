@@ -52,6 +52,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-vlan` | L2 | VLAN hopping |
 | `netlab-ipv6-ra` | L2 | Rogue Router Advertisement (IPv6) |
 | `netlab-discovery` | L2 | CDP/LLDP enumeration |
+| `netlab-lldp-med` | L2 | LLDP-MED abuse |
 
 ## Contributing
 
