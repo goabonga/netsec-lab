@@ -22,3 +22,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-ipv6-ra` | {{ config.extra.versions.netlab_ipv6_ra }} |
 | `netlab-discovery` | {{ config.extra.versions.netlab_discovery }} |
 | `netlab-lldp-med` | {{ config.extra.versions.netlab_lldp_med }} |
+| `netlab-8021x` | {{ config.extra.versions.netlab_8021x }} |
