@@ -15,3 +15,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-tempest` | {{ config.extra.versions.netlab_tempest }} |
 | `netlab-hw-implant` | {{ config.extra.versions.netlab_hw_implant }} |
 | `netlab-dhcp` | {{ config.extra.versions.netlab_dhcp }} |
+| `netlab-arp` | {{ config.extra.versions.netlab_arp }} |

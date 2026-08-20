@@ -46,6 +46,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-tempest` | L1 | TEMPEST / Van Eck emanations |
 | `netlab-hw-implant` | L1 | Rogue hardware implant |
 | `netlab-dhcp` | L2 | DHCP snooping |
+| `netlab-arp` | L2 | ARP spoofing |
 
 ## Contributing
 
