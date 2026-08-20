@@ -196,6 +196,51 @@ jobs:
           module: netlab_wifi_deauth
           check: test
 
+  netlab-evil-twin-lint:
+    name: lint (netlab-evil-twin)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-evil-twin')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-evil-twin
+          module: netlab_evil_twin
+          check: lint
+
+  netlab-evil-twin-typecheck:
+    name: typecheck (netlab-evil-twin)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-evil-twin')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-evil-twin
+          module: netlab_evil_twin
+          check: typecheck
+
+  netlab-evil-twin-test:
+    name: test (netlab-evil-twin)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-evil-twin')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-evil-twin
+          module: netlab_evil_twin
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -210,6 +255,9 @@ jobs:
       - netlab-wifi-deauth-lint
       - netlab-wifi-deauth-typecheck
       - netlab-wifi-deauth-test
+      - netlab-evil-twin-lint
+      - netlab-evil-twin-typecheck
+      - netlab-evil-twin-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -352,6 +400,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-wifi-deauth)
           TAG="netlab-wifi-deauth-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-evil-twin:
+    name: release (netlab-evil-twin)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-evil-twin')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-evil-twin
+        run: uv build --package netlab-evil-twin --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-evil-twin)
+          TAG="netlab-evil-twin-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

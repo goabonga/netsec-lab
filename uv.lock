@@ -9,6 +9,7 @@ resolution-markers = [
 [manifest]
 members = [
     "netlab-core",
+    "netlab-evil-twin",
     "netlab-wifi-deauth",
     "netlab-wifi-recon",
     "netsec-lab",
@@ -567,6 +568,26 @@ requires-dist = [{ name = "scapy", marker = "extra == 'capture'", specifier = ">
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-evil-twin"
+version = "0.0.0"
+source = { editable = "packages/netlab-evil-twin" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-wifi-deauth"
 version = "0.0.0"
 source = { editable = "packages/netlab-wifi-deauth" }
@@ -615,6 +636,7 @@ source = { virtual = "." }
 dev = [
     { name = "mypy" },
     { name = "netlab-core" },
+    { name = "netlab-evil-twin" },
     { name = "netlab-wifi-deauth" },
     { name = "netlab-wifi-recon" },
     { name = "pre-commit" },
@@ -634,6 +656,7 @@ doc = [
 dev = [
     { name = "mypy", specifier = ">=1.18" },
     { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
     { name = "netlab-wifi-deauth", editable = "packages/netlab-wifi-deauth" },
     { name = "netlab-wifi-recon", editable = "packages/netlab-wifi-recon" },
     { name = "pre-commit", specifier = ">=4.0" },
