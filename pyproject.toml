@@ -70,6 +70,7 @@ netlab-mdns-llmnr = { workspace = true }
 netlab-kerberos-net = { workspace = true }
 netlab-quic = { workspace = true }
 netlab-ids = { workspace = true }
+netlab-firewall = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -121,6 +122,7 @@ dev = [
     "netlab-kerberos-net",
     "netlab-quic",
     "netlab-ids",
+    "netlab-firewall",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

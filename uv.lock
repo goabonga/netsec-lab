@@ -19,6 +19,7 @@ members = [
     "netlab-dns",
     "netlab-dnstunnel",
     "netlab-evil-twin",
+    "netlab-firewall",
     "netlab-frag",
     "netlab-hw-implant",
     "netlab-icmp",
@@ -806,6 +807,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-firewall"
+version = "0.0.0"
+source = { editable = "packages/netlab-firewall" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-frag"
 version = "0.0.0"
 source = { editable = "packages/netlab-frag" }
@@ -1444,6 +1465,7 @@ dev = [
     { name = "netlab-dns" },
     { name = "netlab-dnstunnel" },
     { name = "netlab-evil-twin" },
+    { name = "netlab-firewall" },
     { name = "netlab-frag" },
     { name = "netlab-hw-implant" },
     { name = "netlab-icmp" },
@@ -1502,6 +1524,7 @@ dev = [
     { name = "netlab-dns", editable = "packages/netlab-dns" },
     { name = "netlab-dnstunnel", editable = "packages/netlab-dnstunnel" },
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
+    { name = "netlab-firewall", editable = "packages/netlab-firewall" },
     { name = "netlab-frag", editable = "packages/netlab-frag" },
     { name = "netlab-hw-implant", editable = "packages/netlab-hw-implant" },
     { name = "netlab-icmp", editable = "packages/netlab-icmp" },
