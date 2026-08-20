@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Chris <goabonga@pm.me>
+
+name: python-check
+description: Lint, type-check or test a single netsec-lab package.
+inputs:
+  path:
+    description: Package directory (e.g. packages/netlab-dhcp)
+    required: true
+  module:
+    description: Importable module name (e.g. netlab_dhcp)
+    required: true
+  check:
+    description: One of lint | typecheck | test
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: astral-sh/setup-uv@v7
+      with:
+        enable-cache: true
+        cache-suffix: ${{ inputs.check }}
+        python-version: "3.11"
+    - shell: bash
+      run: |
+        set -euo pipefail
+        case "${{ inputs.check }}" in
+          lint)
+            uv sync --frozen --only-group dev
+            uv run --no-sync ruff check --output-format=github \
+              "${{ inputs.path }}/src" "${{ inputs.path }}/tests"
+            uv run --no-sync ruff format --check \
+              "${{ inputs.path }}/src" "${{ inputs.path }}/tests"
+            ;;
+          typecheck)
+            uv sync --frozen
+            uv run --no-sync mypy "${{ inputs.path }}/src"
+            ;;
+          test)
+            uv sync --frozen
+            uv run --no-sync --package "$(basename "${{ inputs.path }}")" \
+              pytest "${{ inputs.path }}/tests" \
+                --cov="${{ inputs.module }}" --cov-report=term-missing
+            ;;
+          *)
+            echo "unknown check: ${{ inputs.check }}"; exit 1 ;;
+        esac

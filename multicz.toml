@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Chris <goabonga@pm.me>
+
+# multicz.toml - per-component versioning, changelogs and tags for the
+# netsec-lab workspace. Driven by Conventional Commits.
+# Docs: https://goabonga.github.io/multicz/
+
+[project]
+commit_convention = "conventional"
+tag_format = "{component}-v{version}"
+initial_version = "0.0.0"
+post_bump_policy = "allow"
+state_file = ".multicz/state.json"
+
+[project.bump_rules]
+feat = "minor"
+fix = "patch"
+perf = "patch"
+revert = "patch"
+
+[[project.changelog_sections]]
+title = "Added"
+types = ["feat"]
+
+[[project.changelog_sections]]
+title = "Fixed"
+types = ["fix"]
+
+[[project.changelog_sections]]
+title = "Performance"
+types = ["perf"]
+
+[components.docs]
+paths = ["docs/**", "zensical.toml"]
+depends_on = []
+changelog = "docs/CHANGELOG.md"
+bump_files = [
+    { file = "zensical.toml", key = "project.extra.versions.docs" },
+]
