@@ -1501,6 +1501,51 @@ jobs:
           module: netlab_covert
           check: test
 
+  netlab-dns-lint:
+    name: lint (netlab-dns)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-dns')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-dns
+          module: netlab_dns
+          check: lint
+
+  netlab-dns-typecheck:
+    name: typecheck (netlab-dns)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-dns')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-dns
+          module: netlab_dns
+          check: typecheck
+
+  netlab-dns-test:
+    name: test (netlab-dns)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-dns')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-dns
+          module: netlab_dns
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1602,6 +1647,9 @@ jobs:
       - netlab-covert-lint
       - netlab-covert-typecheck
       - netlab-covert-test
+      - netlab-dns-lint
+      - netlab-dns-typecheck
+      - netlab-dns-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2672,6 +2720,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-covert)
           TAG="netlab-covert-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-dns:
+    name: release (netlab-dns)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-dns')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-dns
+        run: uv build --package netlab-dns --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-dns)
+          TAG="netlab-dns-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

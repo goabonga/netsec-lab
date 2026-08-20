@@ -60,6 +60,7 @@ netlab-tcphijack = { workspace = true }
 netlab-amplif = { workspace = true }
 netlab-ids-evasion = { workspace = true }
 netlab-covert = { workspace = true }
+netlab-dns = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -101,6 +102,7 @@ dev = [
     "netlab-amplif",
     "netlab-ids-evasion",
     "netlab-covert",
+    "netlab-dns",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
