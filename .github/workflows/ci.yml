@@ -116,6 +116,20 @@ jobs:
           path: packages/netlab-evil-twin
           module: netlab_evil_twin
 
+  netlab-wpa-crack-check:
+    name: check (netlab-wpa-crack)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-wpa-crack')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-wpa-crack
+          module: netlab_wpa_crack
+
   release-bump:
     name: release-bump
     needs:
@@ -125,6 +139,7 @@ jobs:
       - netlab-wifi-recon-check
       - netlab-wifi-deauth-check
       - netlab-evil-twin-check
+      - netlab-wpa-crack-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -299,6 +314,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-evil-twin)
           TAG="netlab-evil-twin-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-wpa-crack:
+    name: release (netlab-wpa-crack)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-wpa-crack')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-wpa-crack
+        run: uv build --package netlab-wpa-crack --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-wpa-crack)
+          TAG="netlab-wpa-crack-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

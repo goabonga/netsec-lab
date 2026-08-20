@@ -12,6 +12,7 @@ members = [
     "netlab-evil-twin",
     "netlab-wifi-deauth",
     "netlab-wifi-recon",
+    "netlab-wpa-crack",
     "netsec-lab",
 ]
 
@@ -628,6 +629,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-wpa-crack"
+version = "0.0.0"
+source = { editable = "packages/netlab-wpa-crack" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netsec-lab"
 version = "0.0.0"
 source = { virtual = "." }
@@ -639,6 +660,7 @@ dev = [
     { name = "netlab-evil-twin" },
     { name = "netlab-wifi-deauth" },
     { name = "netlab-wifi-recon" },
+    { name = "netlab-wpa-crack" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -659,6 +681,7 @@ dev = [
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
     { name = "netlab-wifi-deauth", editable = "packages/netlab-wifi-deauth" },
     { name = "netlab-wifi-recon", editable = "packages/netlab-wifi-recon" },
+    { name = "netlab-wpa-crack", editable = "packages/netlab-wpa-crack" },
     { name = "pre-commit", specifier = ">=4.0" },
     { name = "pytest", specifier = ">=8.3" },
     { name = "pytest-cov", specifier = ">=6.0" },
