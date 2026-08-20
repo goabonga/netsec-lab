@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Chris <goabonga@pm.me>
+
+[project]
+name = "netlab-wps-brute"
+version = "0.0.0"
+description = "netsec-lab L1 PoC: WPS PIN brute force. Recover the WPA PSK via the WPS PIN (online brute or Pixie-Dust)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Chris", email = "goabonga@pm.me" }]
+keywords = ["network-security", "training", "poc", "wps-brute"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Education",
+    "Topic :: Security",
+]
+dependencies = ["netlab-core"]
+
+[project.optional-dependencies]
+capture = ["scapy>=2.5"]
+
+[project.scripts]
+netlab-wps-brute = "netlab_wps_brute.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/goabonga/netsec-lab"
+Source = "https://github.com/goabonga/netsec-lab/tree/main/packages/netlab-wps-brute"
+Issues = "https://github.com/goabonga/netsec-lab/issues"
+Changelog = "https://github.com/goabonga/netsec-lab/blob/main/packages/netlab-wps-brute/CHANGELOG.md"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/netlab_wps_brute"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/netlab_wps_brute", "tests", "README.md", "CHANGELOG.md"]

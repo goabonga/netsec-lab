@@ -10,3 +10,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-wifi-deauth` | {{ config.extra.versions.netlab_wifi_deauth }} |
 | `netlab-evil-twin` | {{ config.extra.versions.netlab_evil_twin }} |
 | `netlab-wpa-crack` | {{ config.extra.versions.netlab_wpa_crack }} |
+| `netlab-wps-brute` | {{ config.extra.versions.netlab_wps_brute }} |
