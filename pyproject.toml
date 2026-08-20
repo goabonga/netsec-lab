@@ -63,6 +63,7 @@ netlab-covert = { workspace = true }
 netlab-dns = { workspace = true }
 netlab-dnstunnel = { workspace = true }
 netlab-icmptunnel = { workspace = true }
+netlab-tls = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -107,6 +108,7 @@ dev = [
     "netlab-dns",
     "netlab-dnstunnel",
     "netlab-icmptunnel",
+    "netlab-tls",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

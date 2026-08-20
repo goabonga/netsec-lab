@@ -71,6 +71,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-dns` | Svc | DNS spoofing / cache poisoning |
 | `netlab-dnstunnel` | Svc | DNS tunneling |
 | `netlab-icmptunnel` | Svc | ICMP tunneling |
+| `netlab-tls` | Svc | TLS downgrade / MITM |
 
 ## Contributing
 

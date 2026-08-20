@@ -40,3 +40,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-dns` | {{ config.extra.versions.netlab_dns }} |
 | `netlab-dnstunnel` | {{ config.extra.versions.netlab_dnstunnel }} |
 | `netlab-icmptunnel` | {{ config.extra.versions.netlab_icmptunnel }} |
+| `netlab-tls` | {{ config.extra.versions.netlab_tls }} |

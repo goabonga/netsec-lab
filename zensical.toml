@@ -19,7 +19,7 @@ nav = [
     { 'Layer 2 - Data Link' = [{ "Overview" = "layer-2-link/index.md" }, { 'DHCP snooping' = "layer-2-link/dhcp.md" }, { 'ARP spoofing' = "layer-2-link/arp.md" }, { 'MAC flooding (CAM overflow)' = "layer-2-link/mac-flooding.md" }, { 'STP root takeover' = "layer-2-link/stp.md" }, { 'VLAN hopping' = "layer-2-link/vlan-hopping.md" }, { 'Rogue Router Advertisement (IPv6)' = "layer-2-link/ipv6-ra.md" }, { 'CDP/LLDP enumeration' = "layer-2-link/discovery-cdp-lldp.md" }, { 'LLDP-MED abuse' = "layer-2-link/lldp-med.md" }, { 'NAC bypass (802.1X)' = "layer-2-link/8021x.md" }, { 'MACsec / MKA' = "layer-2-link/macsec.md" }] },
     { 'Layer 3 - Network' = [{ "Overview" = "layer-3-network/index.md" }, { 'IP spoofing' = "layer-3-network/ip-spoofing.md" }, { 'ICMP redirect & tunneling' = "layer-3-network/icmp.md" }, { 'Fragmentation & IDS evasion' = "layer-3-network/fragmentation.md" }, { 'Routing injection (RIP/OSPF)' = "layer-3-network/routing.md" }, { 'IGMP snooping / spoofing' = "layer-3-network/igmp-multicast.md" }, { 'BGP hijack (simulated)' = "layer-3-network/bgp-hijack.md" }, { 'FHRP takeover (VRRP/HSRP)' = "layer-3-network/vrrp-hsrp.md" }] },
     { 'Layer 4 - Transport' = [{ "Overview" = "layer-4-transport/index.md" }, { 'Port scanning & fingerprinting' = "layer-4-transport/port-scanning.md" }, { 'TCP SYN flood' = "layer-4-transport/syn-flood.md" }, { 'TCP session hijacking' = "layer-4-transport/tcp-hijacking.md" }, { 'Reflection & amplification' = "layer-4-transport/amplification.md" }, { 'NIDS evasion (insertion/evasion)' = "layer-4-transport/ids-evasion.md" }, { 'Covert channels' = "layer-4-transport/covert-channels.md" }] },
-    { 'Network Services' = [{ "Overview" = "network-services/index.md" }, { 'DNS spoofing / cache poisoning' = "network-services/dns-spoofing.md" }, { 'DNS tunneling' = "network-services/dns-tunneling.md" }, { 'ICMP tunneling' = "network-services/icmp-tunneling.md" }] },
+    { 'Network Services' = [{ "Overview" = "network-services/index.md" }, { 'DNS spoofing / cache poisoning' = "network-services/dns-spoofing.md" }, { 'DNS tunneling' = "network-services/dns-tunneling.md" }, { 'ICMP tunneling' = "network-services/icmp-tunneling.md" }, { 'TLS downgrade / MITM' = "network-services/tls.md" }] },
     { "Versions" = "versions.md" },
 ]
 
@@ -102,3 +102,4 @@ netlab_covert = "0.0.0"
 netlab_dns = "0.0.0"
 netlab_dnstunnel = "0.0.0"
 netlab_icmptunnel = "0.0.0"
+netlab_tls = "0.0.0"
