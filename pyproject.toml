@@ -44,6 +44,7 @@ netlab-stp = { workspace = true }
 netlab-vlan = { workspace = true }
 netlab-ipv6-ra = { workspace = true }
 netlab-discovery = { workspace = true }
+netlab-lldp-med = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -69,6 +70,7 @@ dev = [
     "netlab-vlan",
     "netlab-ipv6-ra",
     "netlab-discovery",
+    "netlab-lldp-med",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
