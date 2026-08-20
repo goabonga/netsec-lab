@@ -15,6 +15,7 @@ nav = [
     { "Introduction" = "index.md" },
     { "Lab setup" = "lab-setup.md" },
     { "Methodology" = "methodology.md" },
+    { 'Layer 1 - Physical' = [{ "Overview" = "layer-1-physical/index.md" }] },
     { "Versions" = "versions.md" },
 ]
 
