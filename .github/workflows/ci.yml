@@ -298,6 +298,20 @@ jobs:
           path: packages/netlab-lldp-med
           module: netlab_lldp_med
 
+  netlab-8021x-check:
+    name: check (netlab-8021x)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-8021x')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-8021x
+          module: netlab_8021x
+
   release-bump:
     name: release-bump
     needs:
@@ -320,6 +334,7 @@ jobs:
       - netlab-ipv6-ra-check
       - netlab-discovery-check
       - netlab-lldp-med-check
+      - netlab-8021x-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -910,6 +925,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-lldp-med)
           TAG="netlab-lldp-med-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-8021x:
+    name: release (netlab-8021x)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-8021x')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-8021x
+        run: uv build --package netlab-8021x --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-8021x)
+          TAG="netlab-8021x-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
