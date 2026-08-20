@@ -32,7 +32,7 @@ types = ["perf"]
 
 [components.docs]
 paths = ["docs/**", "zensical.toml"]
-depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan"]
+depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan", "netlab-ipv6-ra"]
 changelog = "docs/CHANGELOG.md"
 bump_files = [
     { file = "zensical.toml", key = "project.extra.versions.docs" },
@@ -188,5 +188,16 @@ bump_files = [
     { file = "packages/netlab-vlan/pyproject.toml", key = "project.version" },
     { file = "packages/netlab-vlan/src/netlab_vlan/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
     { file = "zensical.toml", key = "project.extra.versions.netlab_vlan" },
+]
+post_bump = ["uv lock"]
+
+[components.netlab-ipv6-ra]
+paths = ["packages/netlab-ipv6-ra/**"]
+depends_on = ["netlab-core"]
+changelog = "packages/netlab-ipv6-ra/CHANGELOG.md"
+bump_files = [
+    { file = "packages/netlab-ipv6-ra/pyproject.toml", key = "project.version" },
+    { file = "packages/netlab-ipv6-ra/src/netlab_ipv6_ra/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
+    { file = "zensical.toml", key = "project.extra.versions.netlab_ipv6_ra" },
 ]
 post_bump = ["uv lock"]
