@@ -51,3 +51,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-netflow` | {{ config.extra.versions.netlab_netflow }} |
 | `netlab-pcap-forensics` | {{ config.extra.versions.netlab_pcap_forensics }} |
 | `netlab-tls-inspect` | {{ config.extra.versions.netlab_tls_inspect }} |
+| `netlab-macsec-monitor` | {{ config.extra.versions.netlab_macsec_monitor }} |

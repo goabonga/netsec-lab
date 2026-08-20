@@ -33,6 +33,7 @@ members = [
     "netlab-lldp-med",
     "netlab-macflood",
     "netlab-macsec",
+    "netlab-macsec-monitor",
     "netlab-mdns-llmnr",
     "netlab-netflow",
     "netlab-ntp",
@@ -1090,6 +1091,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-macsec-monitor"
+version = "0.0.0"
+source = { editable = "packages/netlab-macsec-monitor" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-mdns-llmnr"
 version = "0.0.0"
 source = { editable = "packages/netlab-mdns-llmnr" }
@@ -1542,6 +1563,7 @@ dev = [
     { name = "netlab-lldp-med" },
     { name = "netlab-macflood" },
     { name = "netlab-macsec" },
+    { name = "netlab-macsec-monitor" },
     { name = "netlab-mdns-llmnr" },
     { name = "netlab-netflow" },
     { name = "netlab-ntp" },
@@ -1604,6 +1626,7 @@ dev = [
     { name = "netlab-lldp-med", editable = "packages/netlab-lldp-med" },
     { name = "netlab-macflood", editable = "packages/netlab-macflood" },
     { name = "netlab-macsec", editable = "packages/netlab-macsec" },
+    { name = "netlab-macsec-monitor", editable = "packages/netlab-macsec-monitor" },
     { name = "netlab-mdns-llmnr", editable = "packages/netlab-mdns-llmnr" },
     { name = "netlab-netflow", editable = "packages/netlab-netflow" },
     { name = "netlab-ntp", editable = "packages/netlab-ntp" },

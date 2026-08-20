@@ -704,6 +704,20 @@ jobs:
           path: packages/netlab-tls-inspect
           module: netlab_tls_inspect
 
+  netlab-macsec-monitor-check:
+    name: check (netlab-macsec-monitor)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-macsec-monitor')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-macsec-monitor
+          module: netlab_macsec_monitor
+
   release-bump:
     name: release-bump
     needs:
@@ -755,6 +769,7 @@ jobs:
       - netlab-netflow-check
       - netlab-pcap-forensics-check
       - netlab-tls-inspect-check
+      - netlab-macsec-monitor-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2273,6 +2288,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-tls-inspect)
           TAG="netlab-tls-inspect-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-macsec-monitor:
+    name: release (netlab-macsec-monitor)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-macsec-monitor')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-macsec-monitor
+        run: uv build --package netlab-macsec-monitor --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-macsec-monitor)
+          TAG="netlab-macsec-monitor-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
