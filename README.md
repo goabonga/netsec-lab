@@ -37,6 +37,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | Package | Layer | Topic |
 | --- | --- | --- |
 | `netlab-core` | - | Shared foundation (consent, lab, capture, bindings) |
+| `netlab-wifi-recon` | L1 | 802.11 passive reconnaissance |
 
 ## Contributing
 

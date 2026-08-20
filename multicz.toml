@@ -32,7 +32,7 @@ types = ["perf"]
 
 [components.docs]
 paths = ["docs/**", "zensical.toml"]
-depends_on = ["netlab-core"]
+depends_on = ["netlab-core", "netlab-wifi-recon"]
 changelog = "docs/CHANGELOG.md"
 bump_files = [
     { file = "zensical.toml", key = "project.extra.versions.docs" },
@@ -45,5 +45,16 @@ bump_files = [
     { file = "packages/netlab-core/pyproject.toml", key = "project.version" },
     { file = "packages/netlab-core/src/netlab_core/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
     { file = "zensical.toml", key = "project.extra.versions.netlab_core" },
+]
+post_bump = ["uv lock"]
+
+[components.netlab-wifi-recon]
+paths = ["packages/netlab-wifi-recon/**"]
+depends_on = ["netlab-core"]
+changelog = "packages/netlab-wifi-recon/CHANGELOG.md"
+bump_files = [
+    { file = "packages/netlab-wifi-recon/pyproject.toml", key = "project.version" },
+    { file = "packages/netlab-wifi-recon/src/netlab_wifi_recon/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
+    { file = "zensical.toml", key = "project.extra.versions.netlab_wifi_recon" },
 ]
 post_bump = ["uv lock"]
