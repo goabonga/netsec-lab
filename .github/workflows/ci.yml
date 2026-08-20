@@ -466,6 +466,51 @@ jobs:
           module: netlab_hw_implant
           check: test
 
+  netlab-dhcp-lint:
+    name: lint (netlab-dhcp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-dhcp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-dhcp
+          module: netlab_dhcp
+          check: lint
+
+  netlab-dhcp-typecheck:
+    name: typecheck (netlab-dhcp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-dhcp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-dhcp
+          module: netlab_dhcp
+          check: typecheck
+
+  netlab-dhcp-test:
+    name: test (netlab-dhcp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-dhcp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-dhcp
+          module: netlab_dhcp
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -498,6 +543,9 @@ jobs:
       - netlab-hw-implant-lint
       - netlab-hw-implant-typecheck
       - netlab-hw-implant-test
+      - netlab-dhcp-lint
+      - netlab-dhcp-typecheck
+      - netlab-dhcp-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -832,6 +880,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-hw-implant)
           TAG="netlab-hw-implant-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-dhcp:
+    name: release (netlab-dhcp)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-dhcp')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-dhcp
+        run: uv build --package netlab-dhcp --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-dhcp)
+          TAG="netlab-dhcp-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
