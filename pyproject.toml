@@ -47,6 +47,7 @@ netlab-discovery = { workspace = true }
 netlab-lldp-med = { workspace = true }
 netlab-8021x = { workspace = true }
 netlab-macsec = { workspace = true }
+netlab-ipspoof = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -75,6 +76,7 @@ dev = [
     "netlab-lldp-med",
     "netlab-8021x",
     "netlab-macsec",
+    "netlab-ipspoof",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
