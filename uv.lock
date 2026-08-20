@@ -36,6 +36,7 @@ members = [
     "netlab-mdns-llmnr",
     "netlab-netflow",
     "netlab-ntp",
+    "netlab-pcap-forensics",
     "netlab-portscan",
     "netlab-quic",
     "netlab-routing",
@@ -1148,6 +1149,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-pcap-forensics"
+version = "0.0.0"
+source = { editable = "packages/netlab-pcap-forensics" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-portscan"
 version = "0.0.0"
 source = { editable = "packages/netlab-portscan" }
@@ -1503,6 +1524,7 @@ dev = [
     { name = "netlab-mdns-llmnr" },
     { name = "netlab-netflow" },
     { name = "netlab-ntp" },
+    { name = "netlab-pcap-forensics" },
     { name = "netlab-portscan" },
     { name = "netlab-quic" },
     { name = "netlab-routing" },
@@ -1563,6 +1585,7 @@ dev = [
     { name = "netlab-mdns-llmnr", editable = "packages/netlab-mdns-llmnr" },
     { name = "netlab-netflow", editable = "packages/netlab-netflow" },
     { name = "netlab-ntp", editable = "packages/netlab-ntp" },
+    { name = "netlab-pcap-forensics", editable = "packages/netlab-pcap-forensics" },
     { name = "netlab-portscan", editable = "packages/netlab-portscan" },
     { name = "netlab-quic", editable = "packages/netlab-quic" },
     { name = "netlab-routing", editable = "packages/netlab-routing" },

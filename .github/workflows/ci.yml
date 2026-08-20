@@ -2041,6 +2041,51 @@ jobs:
           module: netlab_netflow
           check: test
 
+  netlab-pcap-forensics-lint:
+    name: lint (netlab-pcap-forensics)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-pcap-forensics')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-pcap-forensics
+          module: netlab_pcap_forensics
+          check: lint
+
+  netlab-pcap-forensics-typecheck:
+    name: typecheck (netlab-pcap-forensics)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-pcap-forensics')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-pcap-forensics
+          module: netlab_pcap_forensics
+          check: typecheck
+
+  netlab-pcap-forensics-test:
+    name: test (netlab-pcap-forensics)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-pcap-forensics')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-pcap-forensics
+          module: netlab_pcap_forensics
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -2178,6 +2223,9 @@ jobs:
       - netlab-netflow-lint
       - netlab-netflow-typecheck
       - netlab-netflow-test
+      - netlab-pcap-forensics-lint
+      - netlab-pcap-forensics-typecheck
+      - netlab-pcap-forensics-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -3632,6 +3680,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-netflow)
           TAG="netlab-netflow-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-pcap-forensics:
+    name: release (netlab-pcap-forensics)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-pcap-forensics')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-pcap-forensics
+        run: uv build --package netlab-pcap-forensics --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-pcap-forensics)
+          TAG="netlab-pcap-forensics-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
