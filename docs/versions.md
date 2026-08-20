@@ -16,3 +16,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-hw-implant` | {{ config.extra.versions.netlab_hw_implant }} |
 | `netlab-dhcp` | {{ config.extra.versions.netlab_dhcp }} |
 | `netlab-arp` | {{ config.extra.versions.netlab_arp }} |
+| `netlab-macflood` | {{ config.extra.versions.netlab_macflood }} |

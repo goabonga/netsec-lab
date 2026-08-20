@@ -556,6 +556,51 @@ jobs:
           module: netlab_arp
           check: test
 
+  netlab-macflood-lint:
+    name: lint (netlab-macflood)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-macflood')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-macflood
+          module: netlab_macflood
+          check: lint
+
+  netlab-macflood-typecheck:
+    name: typecheck (netlab-macflood)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-macflood')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-macflood
+          module: netlab_macflood
+          check: typecheck
+
+  netlab-macflood-test:
+    name: test (netlab-macflood)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-macflood')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-macflood
+          module: netlab_macflood
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -594,6 +639,9 @@ jobs:
       - netlab-arp-lint
       - netlab-arp-typecheck
       - netlab-arp-test
+      - netlab-macflood-lint
+      - netlab-macflood-typecheck
+      - netlab-macflood-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -992,6 +1040,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-arp)
           TAG="netlab-arp-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-macflood:
+    name: release (netlab-macflood)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-macflood')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-macflood
+        run: uv build --package netlab-macflood --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-macflood)
+          TAG="netlab-macflood-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
