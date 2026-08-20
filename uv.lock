@@ -27,6 +27,7 @@ members = [
     "netlab-portscan",
     "netlab-routing",
     "netlab-stp",
+    "netlab-synflood",
     "netlab-tap",
     "netlab-tempest",
     "netlab-vlan",
@@ -951,6 +952,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-synflood"
+version = "0.0.0"
+source = { editable = "packages/netlab-synflood" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-tap"
 version = "0.0.0"
 source = { editable = "packages/netlab-tap" }
@@ -1137,6 +1158,7 @@ dev = [
     { name = "netlab-portscan" },
     { name = "netlab-routing" },
     { name = "netlab-stp" },
+    { name = "netlab-synflood" },
     { name = "netlab-tap" },
     { name = "netlab-tempest" },
     { name = "netlab-vlan" },
@@ -1180,6 +1202,7 @@ dev = [
     { name = "netlab-portscan", editable = "packages/netlab-portscan" },
     { name = "netlab-routing", editable = "packages/netlab-routing" },
     { name = "netlab-stp", editable = "packages/netlab-stp" },
+    { name = "netlab-synflood", editable = "packages/netlab-synflood" },
     { name = "netlab-tap", editable = "packages/netlab-tap" },
     { name = "netlab-tempest", editable = "packages/netlab-tempest" },
     { name = "netlab-vlan", editable = "packages/netlab-vlan" },

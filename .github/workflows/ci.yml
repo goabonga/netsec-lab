@@ -1276,6 +1276,51 @@ jobs:
           module: netlab_portscan
           check: test
 
+  netlab-synflood-lint:
+    name: lint (netlab-synflood)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-synflood')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-synflood
+          module: netlab_synflood
+          check: lint
+
+  netlab-synflood-typecheck:
+    name: typecheck (netlab-synflood)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-synflood')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-synflood
+          module: netlab_synflood
+          check: typecheck
+
+  netlab-synflood-test:
+    name: test (netlab-synflood)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-synflood')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-synflood
+          module: netlab_synflood
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1362,6 +1407,9 @@ jobs:
       - netlab-portscan-lint
       - netlab-portscan-typecheck
       - netlab-portscan-test
+      - netlab-synflood-lint
+      - netlab-synflood-typecheck
+      - netlab-synflood-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2272,6 +2320,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-portscan)
           TAG="netlab-portscan-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-synflood:
+    name: release (netlab-synflood)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-synflood')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-synflood
+        run: uv build --package netlab-synflood --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-synflood)
+          TAG="netlab-synflood-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
