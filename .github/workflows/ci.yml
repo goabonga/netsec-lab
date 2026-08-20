@@ -578,6 +578,20 @@ jobs:
           path: packages/netlab-snmp
           module: netlab_snmp
 
+  netlab-ntp-check:
+    name: check (netlab-ntp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-ntp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-ntp
+          module: netlab_ntp
+
   release-bump:
     name: release-bump
     needs:
@@ -620,6 +634,7 @@ jobs:
       - netlab-icmptunnel-check
       - netlab-tls-check
       - netlab-snmp-check
+      - netlab-ntp-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -1850,6 +1865,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-snmp)
           TAG="netlab-snmp-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-ntp:
+    name: release (netlab-ntp)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-ntp')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-ntp
+        run: uv build --package netlab-ntp --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-ntp)
+          TAG="netlab-ntp-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
