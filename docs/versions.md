@@ -46,3 +46,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-mdns-llmnr` | {{ config.extra.versions.netlab_mdns_llmnr }} |
 | `netlab-kerberos-net` | {{ config.extra.versions.netlab_kerberos_net }} |
 | `netlab-quic` | {{ config.extra.versions.netlab_quic }} |
+| `netlab-ids` | {{ config.extra.versions.netlab_ids }} |
