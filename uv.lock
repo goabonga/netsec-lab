@@ -30,6 +30,7 @@ members = [
     "netlab-lldp-med",
     "netlab-macflood",
     "netlab-macsec",
+    "netlab-ntp",
     "netlab-portscan",
     "netlab-routing",
     "netlab-snmp",
@@ -1021,6 +1022,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-ntp"
+version = "0.0.0"
+source = { editable = "packages/netlab-ntp" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-portscan"
 version = "0.0.0"
 source = { editable = "packages/netlab-portscan" }
@@ -1350,6 +1371,7 @@ dev = [
     { name = "netlab-lldp-med" },
     { name = "netlab-macflood" },
     { name = "netlab-macsec" },
+    { name = "netlab-ntp" },
     { name = "netlab-portscan" },
     { name = "netlab-routing" },
     { name = "netlab-snmp" },
@@ -1403,6 +1425,7 @@ dev = [
     { name = "netlab-lldp-med", editable = "packages/netlab-lldp-med" },
     { name = "netlab-macflood", editable = "packages/netlab-macflood" },
     { name = "netlab-macsec", editable = "packages/netlab-macsec" },
+    { name = "netlab-ntp", editable = "packages/netlab-ntp" },
     { name = "netlab-portscan", editable = "packages/netlab-portscan" },
     { name = "netlab-routing", editable = "packages/netlab-routing" },
     { name = "netlab-snmp", editable = "packages/netlab-snmp" },

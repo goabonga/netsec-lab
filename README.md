@@ -73,6 +73,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-icmptunnel` | Svc | ICMP tunneling |
 | `netlab-tls` | Svc | TLS downgrade / MITM |
 | `netlab-snmp` | Svc | SNMP enumeration |
+| `netlab-ntp` | Svc | NTP time-shift MITM |
 
 ## Contributing
 
