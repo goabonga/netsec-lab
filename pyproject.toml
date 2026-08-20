@@ -53,6 +53,7 @@ netlab-frag = { workspace = true }
 netlab-routing = { workspace = true }
 netlab-igmp = { workspace = true }
 netlab-bgp = { workspace = true }
+netlab-vrrp-hsrp = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -87,6 +88,7 @@ dev = [
     "netlab-routing",
     "netlab-igmp",
     "netlab-bgp",
+    "netlab-vrrp-hsrp",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
