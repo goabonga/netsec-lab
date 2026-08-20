@@ -67,6 +67,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-tcphijack` | L4 | TCP session hijacking |
 | `netlab-amplif` | L4 | Reflection & amplification |
 | `netlab-ids-evasion` | L4 | NIDS evasion (insertion/evasion) (flagship) |
+| `netlab-covert` | L4 | Covert channels |
 
 ## Contributing
 

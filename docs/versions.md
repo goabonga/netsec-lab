@@ -36,3 +36,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-tcphijack` | {{ config.extra.versions.netlab_tcphijack }} |
 | `netlab-amplif` | {{ config.extra.versions.netlab_amplif }} |
 | `netlab-ids-evasion` | {{ config.extra.versions.netlab_ids_evasion }} |
+| `netlab-covert` | {{ config.extra.versions.netlab_covert }} |
