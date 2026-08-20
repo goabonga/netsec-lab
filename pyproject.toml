@@ -57,6 +57,7 @@ netlab-vrrp-hsrp = { workspace = true }
 netlab-portscan = { workspace = true }
 netlab-synflood = { workspace = true }
 netlab-tcphijack = { workspace = true }
+netlab-amplif = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -95,6 +96,7 @@ dev = [
     "netlab-portscan",
     "netlab-synflood",
     "netlab-tcphijack",
+    "netlab-amplif",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

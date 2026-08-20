@@ -9,6 +9,7 @@ resolution-markers = [
 [manifest]
 members = [
     "netlab-8021x",
+    "netlab-amplif",
     "netlab-arp",
     "netlab-bgp",
     "netlab-core",
@@ -599,6 +600,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-amplif"
+version = "0.0.0"
+source = { editable = "packages/netlab-amplif" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-arp"
 version = "0.0.0"
 source = { editable = "packages/netlab-arp" }
@@ -1161,6 +1182,7 @@ source = { virtual = "." }
 dev = [
     { name = "mypy" },
     { name = "netlab-8021x" },
+    { name = "netlab-amplif" },
     { name = "netlab-arp" },
     { name = "netlab-bgp" },
     { name = "netlab-core" },
@@ -1206,6 +1228,7 @@ doc = [
 dev = [
     { name = "mypy", specifier = ">=1.18" },
     { name = "netlab-8021x", editable = "packages/netlab-8021x" },
+    { name = "netlab-amplif", editable = "packages/netlab-amplif" },
     { name = "netlab-arp", editable = "packages/netlab-arp" },
     { name = "netlab-bgp", editable = "packages/netlab-bgp" },
     { name = "netlab-core", editable = "packages/netlab-core" },
