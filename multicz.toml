@@ -32,7 +32,7 @@ types = ["perf"]
 
 [components.docs]
 paths = ["docs/**", "zensical.toml"]
-depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest"]
+depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant"]
 changelog = "docs/CHANGELOG.md"
 bump_files = [
     { file = "zensical.toml", key = "project.extra.versions.docs" },
@@ -122,5 +122,16 @@ bump_files = [
     { file = "packages/netlab-tempest/pyproject.toml", key = "project.version" },
     { file = "packages/netlab-tempest/src/netlab_tempest/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
     { file = "zensical.toml", key = "project.extra.versions.netlab_tempest" },
+]
+post_bump = ["uv lock"]
+
+[components.netlab-hw-implant]
+paths = ["packages/netlab-hw-implant/**"]
+depends_on = ["netlab-core"]
+changelog = "packages/netlab-hw-implant/CHANGELOG.md"
+bump_files = [
+    { file = "packages/netlab-hw-implant/pyproject.toml", key = "project.version" },
+    { file = "packages/netlab-hw-implant/src/netlab_hw_implant/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
+    { file = "zensical.toml", key = "project.extra.versions.netlab_hw_implant" },
 ]
 post_bump = ["uv lock"]

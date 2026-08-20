@@ -421,6 +421,51 @@ jobs:
           module: netlab_tempest
           check: test
 
+  netlab-hw-implant-lint:
+    name: lint (netlab-hw-implant)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-hw-implant')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-hw-implant
+          module: netlab_hw_implant
+          check: lint
+
+  netlab-hw-implant-typecheck:
+    name: typecheck (netlab-hw-implant)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-hw-implant')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-hw-implant
+          module: netlab_hw_implant
+          check: typecheck
+
+  netlab-hw-implant-test:
+    name: test (netlab-hw-implant)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-hw-implant')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-hw-implant
+          module: netlab_hw_implant
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -450,6 +495,9 @@ jobs:
       - netlab-tempest-lint
       - netlab-tempest-typecheck
       - netlab-tempest-test
+      - netlab-hw-implant-lint
+      - netlab-hw-implant-typecheck
+      - netlab-hw-implant-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -752,6 +800,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-tempest)
           TAG="netlab-tempest-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-hw-implant:
+    name: release (netlab-hw-implant)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-hw-implant')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-hw-implant
+        run: uv build --package netlab-hw-implant --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-hw-implant)
+          TAG="netlab-hw-implant-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

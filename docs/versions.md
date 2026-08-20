@@ -13,3 +13,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-wps-brute` | {{ config.extra.versions.netlab_wps_brute }} |
 | `netlab-tap` | {{ config.extra.versions.netlab_tap }} |
 | `netlab-tempest` | {{ config.extra.versions.netlab_tempest }} |
+| `netlab-hw-implant` | {{ config.extra.versions.netlab_hw_implant }} |
