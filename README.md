@@ -82,6 +82,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-netflow` | Tool | NetFlow / IPFIX analysis |
 | `netlab-pcap-forensics` | Tool | PCAP forensics |
 | `netlab-tls-inspect` | Tool | TLS inspection proxy |
+| `netlab-macsec-monitor` | Tool | MACsec posture check |
 
 ## Contributing
 
