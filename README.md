@@ -79,6 +79,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-quic` | Svc | QUIC / HTTP3 fingerprinting |
 | `netlab-ids` | Tool | IDS rule harness |
 | `netlab-firewall` | Tool | Firewall policy |
+| `netlab-netflow` | Tool | NetFlow / IPFIX analysis |
 
 ## Contributing
 

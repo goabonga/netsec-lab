@@ -71,6 +71,7 @@ netlab-kerberos-net = { workspace = true }
 netlab-quic = { workspace = true }
 netlab-ids = { workspace = true }
 netlab-firewall = { workspace = true }
+netlab-netflow = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -123,6 +124,7 @@ dev = [
     "netlab-quic",
     "netlab-ids",
     "netlab-firewall",
+    "netlab-netflow",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

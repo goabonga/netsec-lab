@@ -1996,6 +1996,51 @@ jobs:
           module: netlab_firewall
           check: test
 
+  netlab-netflow-lint:
+    name: lint (netlab-netflow)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-netflow')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-netflow
+          module: netlab_netflow
+          check: lint
+
+  netlab-netflow-typecheck:
+    name: typecheck (netlab-netflow)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-netflow')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-netflow
+          module: netlab_netflow
+          check: typecheck
+
+  netlab-netflow-test:
+    name: test (netlab-netflow)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-netflow')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-netflow
+          module: netlab_netflow
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -2130,6 +2175,9 @@ jobs:
       - netlab-firewall-lint
       - netlab-firewall-typecheck
       - netlab-firewall-test
+      - netlab-netflow-lint
+      - netlab-netflow-typecheck
+      - netlab-netflow-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -3552,6 +3600,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-firewall)
           TAG="netlab-firewall-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-netflow:
+    name: release (netlab-netflow)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-netflow')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-netflow
+        run: uv build --package netlab-netflow --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-netflow)
+          TAG="netlab-netflow-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
