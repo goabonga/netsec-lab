@@ -331,6 +331,51 @@ jobs:
           module: netlab_wps_brute
           check: test
 
+  netlab-tap-lint:
+    name: lint (netlab-tap)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-tap')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-tap
+          module: netlab_tap
+          check: lint
+
+  netlab-tap-typecheck:
+    name: typecheck (netlab-tap)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-tap')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-tap
+          module: netlab_tap
+          check: typecheck
+
+  netlab-tap-test:
+    name: test (netlab-tap)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-tap')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-tap
+          module: netlab_tap
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -354,6 +399,9 @@ jobs:
       - netlab-wps-brute-lint
       - netlab-wps-brute-typecheck
       - netlab-wps-brute-test
+      - netlab-tap-lint
+      - netlab-tap-typecheck
+      - netlab-tap-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -592,6 +640,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-wps-brute)
           TAG="netlab-wps-brute-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-tap:
+    name: release (netlab-tap)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-tap')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-tap
+        run: uv build --package netlab-tap --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-tap)
+          TAG="netlab-tap-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

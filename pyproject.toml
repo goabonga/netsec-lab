@@ -34,6 +34,7 @@ netlab-wifi-deauth = { workspace = true }
 netlab-evil-twin = { workspace = true }
 netlab-wpa-crack = { workspace = true }
 netlab-wps-brute = { workspace = true }
+netlab-tap = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -49,6 +50,7 @@ dev = [
     "netlab-evil-twin",
     "netlab-wpa-crack",
     "netlab-wps-brute",
+    "netlab-tap",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
