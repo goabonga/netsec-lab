@@ -1321,6 +1321,51 @@ jobs:
           module: netlab_synflood
           check: test
 
+  netlab-tcphijack-lint:
+    name: lint (netlab-tcphijack)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-tcphijack')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-tcphijack
+          module: netlab_tcphijack
+          check: lint
+
+  netlab-tcphijack-typecheck:
+    name: typecheck (netlab-tcphijack)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-tcphijack')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-tcphijack
+          module: netlab_tcphijack
+          check: typecheck
+
+  netlab-tcphijack-test:
+    name: test (netlab-tcphijack)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-tcphijack')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-tcphijack
+          module: netlab_tcphijack
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1410,6 +1455,9 @@ jobs:
       - netlab-synflood-lint
       - netlab-synflood-typecheck
       - netlab-synflood-test
+      - netlab-tcphijack-lint
+      - netlab-tcphijack-typecheck
+      - netlab-tcphijack-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2352,6 +2400,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-synflood)
           TAG="netlab-synflood-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-tcphijack:
+    name: release (netlab-tcphijack)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-tcphijack')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-tcphijack
+        run: uv build --package netlab-tcphijack --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-tcphijack)
+          TAG="netlab-tcphijack-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
