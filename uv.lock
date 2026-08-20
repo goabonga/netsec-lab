@@ -34,6 +34,7 @@ members = [
     "netlab-macflood",
     "netlab-macsec",
     "netlab-mdns-llmnr",
+    "netlab-netflow",
     "netlab-ntp",
     "netlab-portscan",
     "netlab-quic",
@@ -1107,6 +1108,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-netflow"
+version = "0.0.0"
+source = { editable = "packages/netlab-netflow" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-ntp"
 version = "0.0.0"
 source = { editable = "packages/netlab-ntp" }
@@ -1480,6 +1501,7 @@ dev = [
     { name = "netlab-macflood" },
     { name = "netlab-macsec" },
     { name = "netlab-mdns-llmnr" },
+    { name = "netlab-netflow" },
     { name = "netlab-ntp" },
     { name = "netlab-portscan" },
     { name = "netlab-quic" },
@@ -1539,6 +1561,7 @@ dev = [
     { name = "netlab-macflood", editable = "packages/netlab-macflood" },
     { name = "netlab-macsec", editable = "packages/netlab-macsec" },
     { name = "netlab-mdns-llmnr", editable = "packages/netlab-mdns-llmnr" },
+    { name = "netlab-netflow", editable = "packages/netlab-netflow" },
     { name = "netlab-ntp", editable = "packages/netlab-ntp" },
     { name = "netlab-portscan", editable = "packages/netlab-portscan" },
     { name = "netlab-quic", editable = "packages/netlab-quic" },

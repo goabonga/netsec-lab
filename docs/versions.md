@@ -48,3 +48,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-quic` | {{ config.extra.versions.netlab_quic }} |
 | `netlab-ids` | {{ config.extra.versions.netlab_ids }} |
 | `netlab-firewall` | {{ config.extra.versions.netlab_firewall }} |
+| `netlab-netflow` | {{ config.extra.versions.netlab_netflow }} |
