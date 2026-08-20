@@ -27,7 +27,8 @@ netlab-discovery attack --i-own-this-network --iface veth-host
 netlab-discovery detect --iface veth-host
 ```
 
-Indicators to watch, and the associated IDS rule.
+Indicators to watch, and the associated IDS rule (see
+[`netlab-ids`](../defensive-tooling/ids.md)).
 
 <!-- TODO: concrete indicators + Suricata/Snort rule -->
 

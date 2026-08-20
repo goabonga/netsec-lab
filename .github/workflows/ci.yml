@@ -1906,6 +1906,51 @@ jobs:
           module: netlab_quic
           check: test
 
+  netlab-ids-lint:
+    name: lint (netlab-ids)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-ids')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-ids
+          module: netlab_ids
+          check: lint
+
+  netlab-ids-typecheck:
+    name: typecheck (netlab-ids)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-ids')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-ids
+          module: netlab_ids
+          check: typecheck
+
+  netlab-ids-test:
+    name: test (netlab-ids)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-ids')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-ids
+          module: netlab_ids
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -2034,6 +2079,9 @@ jobs:
       - netlab-quic-lint
       - netlab-quic-typecheck
       - netlab-quic-test
+      - netlab-ids-lint
+      - netlab-ids-typecheck
+      - netlab-ids-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -3392,6 +3440,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-quic)
           TAG="netlab-quic-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-ids:
+    name: release (netlab-ids)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-ids')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-ids
+        run: uv build --package netlab-ids --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-ids)
+          TAG="netlab-ids-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

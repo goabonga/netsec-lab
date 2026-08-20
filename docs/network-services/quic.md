@@ -39,7 +39,8 @@ The Initial's long header exposes the version and SNI - the recon and filtering 
 netlab-quic detect --iface veth-host
 ```
 
-Indicators to watch, and the associated IDS rule.
+Indicators to watch, and the associated IDS rule (see
+[`netlab-ids`](../defensive-tooling/ids.md)).
 
 <!-- TODO: concrete indicators + Suricata/Snort rule -->
 
