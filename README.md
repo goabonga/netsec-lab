@@ -70,6 +70,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-covert` | L4 | Covert channels |
 | `netlab-dns` | Svc | DNS spoofing / cache poisoning |
 | `netlab-dnstunnel` | Svc | DNS tunneling |
+| `netlab-icmptunnel` | Svc | ICMP tunneling |
 
 ## Contributing
 
