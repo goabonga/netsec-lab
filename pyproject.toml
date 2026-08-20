@@ -42,6 +42,7 @@ netlab-arp = { workspace = true }
 netlab-macflood = { workspace = true }
 netlab-stp = { workspace = true }
 netlab-vlan = { workspace = true }
+netlab-ipv6-ra = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -65,6 +66,7 @@ dev = [
     "netlab-macflood",
     "netlab-stp",
     "netlab-vlan",
+    "netlab-ipv6-ra",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

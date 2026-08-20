@@ -13,6 +13,7 @@ members = [
     "netlab-dhcp",
     "netlab-evil-twin",
     "netlab-hw-implant",
+    "netlab-ipv6-ra",
     "netlab-macflood",
     "netlab-stp",
     "netlab-tap",
@@ -658,6 +659,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-ipv6-ra"
+version = "0.0.0"
+source = { editable = "packages/netlab-ipv6-ra" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-macflood"
 version = "0.0.0"
 source = { editable = "packages/netlab-macflood" }
@@ -850,6 +871,7 @@ dev = [
     { name = "netlab-dhcp" },
     { name = "netlab-evil-twin" },
     { name = "netlab-hw-implant" },
+    { name = "netlab-ipv6-ra" },
     { name = "netlab-macflood" },
     { name = "netlab-stp" },
     { name = "netlab-tap" },
@@ -880,6 +902,7 @@ dev = [
     { name = "netlab-dhcp", editable = "packages/netlab-dhcp" },
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
     { name = "netlab-hw-implant", editable = "packages/netlab-hw-implant" },
+    { name = "netlab-ipv6-ra", editable = "packages/netlab-ipv6-ra" },
     { name = "netlab-macflood", editable = "packages/netlab-macflood" },
     { name = "netlab-stp", editable = "packages/netlab-stp" },
     { name = "netlab-tap", editable = "packages/netlab-tap" },

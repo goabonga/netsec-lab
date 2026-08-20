@@ -256,6 +256,20 @@ jobs:
           path: packages/netlab-vlan
           module: netlab_vlan
 
+  netlab-ipv6-ra-check:
+    name: check (netlab-ipv6-ra)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-ipv6-ra')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-ipv6-ra
+          module: netlab_ipv6_ra
+
   release-bump:
     name: release-bump
     needs:
@@ -275,6 +289,7 @@ jobs:
       - netlab-macflood-check
       - netlab-stp-check
       - netlab-vlan-check
+      - netlab-ipv6-ra-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -769,6 +784,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-vlan)
           TAG="netlab-vlan-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-ipv6-ra:
+    name: release (netlab-ipv6-ra)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-ipv6-ra')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-ipv6-ra
+        run: uv build --package netlab-ipv6-ra --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-ipv6-ra)
+          TAG="netlab-ipv6-ra-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

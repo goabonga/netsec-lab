@@ -19,3 +19,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-macflood` | {{ config.extra.versions.netlab_macflood }} |
 | `netlab-stp` | {{ config.extra.versions.netlab_stp }} |
 | `netlab-vlan` | {{ config.extra.versions.netlab_vlan }} |
+| `netlab-ipv6-ra` | {{ config.extra.versions.netlab_ipv6_ra }} |
