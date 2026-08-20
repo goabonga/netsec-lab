@@ -690,6 +690,20 @@ jobs:
           path: packages/netlab-pcap-forensics
           module: netlab_pcap_forensics
 
+  netlab-tls-inspect-check:
+    name: check (netlab-tls-inspect)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-tls-inspect')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-tls-inspect
+          module: netlab_tls_inspect
+
   release-bump:
     name: release-bump
     needs:
@@ -740,6 +754,7 @@ jobs:
       - netlab-firewall-check
       - netlab-netflow-check
       - netlab-pcap-forensics-check
+      - netlab-tls-inspect-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2226,6 +2241,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-pcap-forensics)
           TAG="netlab-pcap-forensics-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-tls-inspect:
+    name: release (netlab-tls-inspect)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-tls-inspect')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-tls-inspect
+        run: uv build --package netlab-tls-inspect --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-tls-inspect)
+          TAG="netlab-tls-inspect-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
