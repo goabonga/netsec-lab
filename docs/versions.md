@@ -25,3 +25,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-8021x` | {{ config.extra.versions.netlab_8021x }} |
 | `netlab-macsec` | {{ config.extra.versions.netlab_macsec }} |
 | `netlab-ipspoof` | {{ config.extra.versions.netlab_ipspoof }} |
+| `netlab-icmp` | {{ config.extra.versions.netlab_icmp }} |
