@@ -44,6 +44,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-wps-brute` | L1 | WPS PIN brute force |
 | `netlab-tap` | L1 | Passive network tapping |
 | `netlab-tempest` | L1 | TEMPEST / Van Eck emanations |
+| `netlab-hw-implant` | L1 | Rogue hardware implant |
 
 ## Contributing
 
