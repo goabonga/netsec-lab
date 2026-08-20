@@ -11,3 +11,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-evil-twin` | {{ config.extra.versions.netlab_evil_twin }} |
 | `netlab-wpa-crack` | {{ config.extra.versions.netlab_wpa_crack }} |
 | `netlab-wps-brute` | {{ config.extra.versions.netlab_wps_brute }} |
+| `netlab-tap` | {{ config.extra.versions.netlab_tap }} |

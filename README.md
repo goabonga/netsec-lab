@@ -42,6 +42,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-evil-twin` | L1 | Evil twin / rogue AP |
 | `netlab-wpa-crack` | L1 | WPA/WPA2 handshake & PMKID crack |
 | `netlab-wps-brute` | L1 | WPS PIN brute force |
+| `netlab-tap` | L1 | Passive network tapping |
 
 ## Contributing
 
