@@ -16,6 +16,7 @@ nav = [
     { "Lab setup" = "lab-setup.md" },
     { "Methodology" = "methodology.md" },
     { 'Layer 1 - Physical' = [{ "Overview" = "layer-1-physical/index.md" }, { '802.11 passive reconnaissance' = "layer-1-physical/wifi-recon.md" }, { '802.11 deauthentication' = "layer-1-physical/wifi-deauth.md" }, { 'Evil twin / rogue AP' = "layer-1-physical/evil-twin.md" }, { 'WPA/WPA2 handshake & PMKID crack' = "layer-1-physical/wpa-crack.md" }, { 'WPS PIN brute force' = "layer-1-physical/wps-brute.md" }, { 'Passive network tapping' = "layer-1-physical/network-tapping.md" }, { 'TEMPEST / Van Eck emanations' = "layer-1-physical/tempest.md" }, { 'Rogue hardware implant' = "layer-1-physical/hardware-implant.md" }] },
+    { 'Layer 2 - Data Link' = [{ "Overview" = "layer-2-link/index.md" }] },
     { "Versions" = "versions.md" },
 ]
 
