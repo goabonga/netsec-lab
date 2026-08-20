@@ -33,3 +33,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-vrrp-hsrp` | {{ config.extra.versions.netlab_vrrp_hsrp }} |
 | `netlab-portscan` | {{ config.extra.versions.netlab_portscan }} |
 | `netlab-synflood` | {{ config.extra.versions.netlab_synflood }} |
+| `netlab-tcphijack` | {{ config.extra.versions.netlab_tcphijack }} |

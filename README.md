@@ -64,6 +64,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-vrrp-hsrp` | L3 | FHRP takeover (VRRP/HSRP) |
 | `netlab-portscan` | L4 | Port scanning & fingerprinting |
 | `netlab-synflood` | L4 | TCP SYN flood |
+| `netlab-tcphijack` | L4 | TCP session hijacking |
 
 ## Contributing
 

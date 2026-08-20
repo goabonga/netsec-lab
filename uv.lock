@@ -29,6 +29,7 @@ members = [
     "netlab-stp",
     "netlab-synflood",
     "netlab-tap",
+    "netlab-tcphijack",
     "netlab-tempest",
     "netlab-vlan",
     "netlab-vrrp-hsrp",
@@ -992,6 +993,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-tcphijack"
+version = "0.0.0"
+source = { editable = "packages/netlab-tcphijack" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-tempest"
 version = "0.0.0"
 source = { editable = "packages/netlab-tempest" }
@@ -1160,6 +1181,7 @@ dev = [
     { name = "netlab-stp" },
     { name = "netlab-synflood" },
     { name = "netlab-tap" },
+    { name = "netlab-tcphijack" },
     { name = "netlab-tempest" },
     { name = "netlab-vlan" },
     { name = "netlab-vrrp-hsrp" },
@@ -1204,6 +1226,7 @@ dev = [
     { name = "netlab-stp", editable = "packages/netlab-stp" },
     { name = "netlab-synflood", editable = "packages/netlab-synflood" },
     { name = "netlab-tap", editable = "packages/netlab-tap" },
+    { name = "netlab-tcphijack", editable = "packages/netlab-tcphijack" },
     { name = "netlab-tempest", editable = "packages/netlab-tempest" },
     { name = "netlab-vlan", editable = "packages/netlab-vlan" },
     { name = "netlab-vrrp-hsrp", editable = "packages/netlab-vrrp-hsrp" },
