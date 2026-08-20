@@ -1456,6 +1456,51 @@ jobs:
           module: netlab_ids_evasion
           check: test
 
+  netlab-covert-lint:
+    name: lint (netlab-covert)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-covert')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-covert
+          module: netlab_covert
+          check: lint
+
+  netlab-covert-typecheck:
+    name: typecheck (netlab-covert)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-covert')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-covert
+          module: netlab_covert
+          check: typecheck
+
+  netlab-covert-test:
+    name: test (netlab-covert)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-covert')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-covert
+          module: netlab_covert
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1554,6 +1599,9 @@ jobs:
       - netlab-ids-evasion-lint
       - netlab-ids-evasion-typecheck
       - netlab-ids-evasion-test
+      - netlab-covert-lint
+      - netlab-covert-typecheck
+      - netlab-covert-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2592,6 +2640,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-ids-evasion)
           TAG="netlab-ids-evasion-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-covert:
+    name: release (netlab-covert)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-covert')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-covert
+        run: uv build --package netlab-covert --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-covert)
+          TAG="netlab-covert-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

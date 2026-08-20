@@ -13,6 +13,7 @@ members = [
     "netlab-arp",
     "netlab-bgp",
     "netlab-core",
+    "netlab-covert",
     "netlab-dhcp",
     "netlab-discovery",
     "netlab-evil-twin",
@@ -675,6 +676,26 @@ requires-dist = [{ name = "scapy", marker = "extra == 'capture'", specifier = ">
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-covert"
+version = "0.0.0"
+source = { editable = "packages/netlab-covert" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-dhcp"
 version = "0.0.0"
 source = { editable = "packages/netlab-dhcp" }
@@ -1207,6 +1228,7 @@ dev = [
     { name = "netlab-arp" },
     { name = "netlab-bgp" },
     { name = "netlab-core" },
+    { name = "netlab-covert" },
     { name = "netlab-dhcp" },
     { name = "netlab-discovery" },
     { name = "netlab-evil-twin" },
@@ -1254,6 +1276,7 @@ dev = [
     { name = "netlab-arp", editable = "packages/netlab-arp" },
     { name = "netlab-bgp", editable = "packages/netlab-bgp" },
     { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "netlab-covert", editable = "packages/netlab-covert" },
     { name = "netlab-dhcp", editable = "packages/netlab-dhcp" },
     { name = "netlab-discovery", editable = "packages/netlab-discovery" },
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
