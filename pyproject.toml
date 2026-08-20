@@ -30,6 +30,7 @@ members = ["packages/*"]
 
 [tool.uv.sources]
 netlab-wifi-recon = { workspace = true }
+netlab-wifi-deauth = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -41,6 +42,7 @@ dev = [
     "ruff>=0.15",
     "scapy>=2.5",
     "netlab-wifi-recon",
+    "netlab-wifi-deauth",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

@@ -15,7 +15,7 @@ nav = [
     { "Introduction" = "index.md" },
     { "Lab setup" = "lab-setup.md" },
     { "Methodology" = "methodology.md" },
-    { 'Layer 1 - Physical' = [{ "Overview" = "layer-1-physical/index.md" }, { '802.11 passive reconnaissance' = "layer-1-physical/wifi-recon.md" }] },
+    { 'Layer 1 - Physical' = [{ "Overview" = "layer-1-physical/index.md" }, { '802.11 passive reconnaissance' = "layer-1-physical/wifi-recon.md" }, { '802.11 deauthentication' = "layer-1-physical/wifi-deauth.md" }] },
     { "Versions" = "versions.md" },
 ]
 
@@ -65,3 +65,4 @@ pymdownx.tilde = {}
 docs = "0.0.0"
 netlab_core = "0.0.0"
 netlab_wifi_recon = "0.0.0"
+netlab_wifi_deauth = "0.0.0"
