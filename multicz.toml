@@ -32,7 +32,7 @@ types = ["perf"]
 
 [components.docs]
 paths = ["docs/**", "zensical.toml"]
-depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth"]
+depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin"]
 changelog = "docs/CHANGELOG.md"
 bump_files = [
     { file = "zensical.toml", key = "project.extra.versions.docs" },
@@ -67,5 +67,16 @@ bump_files = [
     { file = "packages/netlab-wifi-deauth/pyproject.toml", key = "project.version" },
     { file = "packages/netlab-wifi-deauth/src/netlab_wifi_deauth/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
     { file = "zensical.toml", key = "project.extra.versions.netlab_wifi_deauth" },
+]
+post_bump = ["uv lock"]
+
+[components.netlab-evil-twin]
+paths = ["packages/netlab-evil-twin/**"]
+depends_on = ["netlab-core"]
+changelog = "packages/netlab-evil-twin/CHANGELOG.md"
+bump_files = [
+    { file = "packages/netlab-evil-twin/pyproject.toml", key = "project.version" },
+    { file = "packages/netlab-evil-twin/src/netlab_evil_twin/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
+    { file = "zensical.toml", key = "project.extra.versions.netlab_evil_twin" },
 ]
 post_bump = ["uv lock"]
