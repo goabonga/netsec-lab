@@ -646,6 +646,51 @@ jobs:
           module: netlab_stp
           check: test
 
+  netlab-vlan-lint:
+    name: lint (netlab-vlan)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-vlan')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-vlan
+          module: netlab_vlan
+          check: lint
+
+  netlab-vlan-typecheck:
+    name: typecheck (netlab-vlan)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-vlan')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-vlan
+          module: netlab_vlan
+          check: typecheck
+
+  netlab-vlan-test:
+    name: test (netlab-vlan)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-vlan')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-vlan
+          module: netlab_vlan
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -690,6 +735,9 @@ jobs:
       - netlab-stp-lint
       - netlab-stp-typecheck
       - netlab-stp-test
+      - netlab-vlan-lint
+      - netlab-vlan-typecheck
+      - netlab-vlan-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -1152,6 +1200,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-stp)
           TAG="netlab-stp-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-vlan:
+    name: release (netlab-vlan)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-vlan')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-vlan
+        run: uv build --package netlab-vlan --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-vlan)
+          TAG="netlab-vlan-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
