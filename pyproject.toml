@@ -29,6 +29,7 @@ package = false
 members = ["packages/*"]
 
 [tool.uv.sources]
+netlab-wifi-recon = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -39,6 +40,7 @@ dev = [
     "pytest-cov>=6.0",
     "ruff>=0.15",
     "scapy>=2.5",
+    "netlab-wifi-recon",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
