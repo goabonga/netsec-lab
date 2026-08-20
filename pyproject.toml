@@ -51,6 +51,7 @@ netlab-ipspoof = { workspace = true }
 netlab-icmp = { workspace = true }
 netlab-frag = { workspace = true }
 netlab-routing = { workspace = true }
+netlab-igmp = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -83,6 +84,7 @@ dev = [
     "netlab-icmp",
     "netlab-frag",
     "netlab-routing",
+    "netlab-igmp",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

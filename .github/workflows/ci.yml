@@ -1096,6 +1096,51 @@ jobs:
           module: netlab_routing
           check: test
 
+  netlab-igmp-lint:
+    name: lint (netlab-igmp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-igmp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-igmp
+          module: netlab_igmp
+          check: lint
+
+  netlab-igmp-typecheck:
+    name: typecheck (netlab-igmp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-igmp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-igmp
+          module: netlab_igmp
+          check: typecheck
+
+  netlab-igmp-test:
+    name: test (netlab-igmp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-igmp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-igmp
+          module: netlab_igmp
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1170,6 +1215,9 @@ jobs:
       - netlab-routing-lint
       - netlab-routing-typecheck
       - netlab-routing-test
+      - netlab-igmp-lint
+      - netlab-igmp-typecheck
+      - netlab-igmp-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -1952,6 +2000,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-routing)
           TAG="netlab-routing-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-igmp:
+    name: release (netlab-igmp)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-igmp')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-igmp
+        run: uv build --package netlab-igmp --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-igmp)
+          TAG="netlab-igmp-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
