@@ -56,6 +56,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-8021x` | L2 | NAC bypass (802.1X) |
 | `netlab-macsec` | L2 | MACsec / MKA |
 | `netlab-ipspoof` | L3 | IP spoofing |
+| `netlab-icmp` | L3 | ICMP redirect & tunneling |
 
 ## Contributing
 
