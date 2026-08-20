@@ -17,6 +17,7 @@ members = [
     "netlab-stp",
     "netlab-tap",
     "netlab-tempest",
+    "netlab-vlan",
     "netlab-wifi-deauth",
     "netlab-wifi-recon",
     "netlab-wpa-crack",
@@ -737,6 +738,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-vlan"
+version = "0.0.0"
+source = { editable = "packages/netlab-vlan" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-wifi-deauth"
 version = "0.0.0"
 source = { editable = "packages/netlab-wifi-deauth" }
@@ -833,6 +854,7 @@ dev = [
     { name = "netlab-stp" },
     { name = "netlab-tap" },
     { name = "netlab-tempest" },
+    { name = "netlab-vlan" },
     { name = "netlab-wifi-deauth" },
     { name = "netlab-wifi-recon" },
     { name = "netlab-wpa-crack" },
@@ -862,6 +884,7 @@ dev = [
     { name = "netlab-stp", editable = "packages/netlab-stp" },
     { name = "netlab-tap", editable = "packages/netlab-tap" },
     { name = "netlab-tempest", editable = "packages/netlab-tempest" },
+    { name = "netlab-vlan", editable = "packages/netlab-vlan" },
     { name = "netlab-wifi-deauth", editable = "packages/netlab-wifi-deauth" },
     { name = "netlab-wifi-recon", editable = "packages/netlab-wifi-recon" },
     { name = "netlab-wpa-crack", editable = "packages/netlab-wpa-crack" },

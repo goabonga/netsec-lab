@@ -49,6 +49,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-arp` | L2 | ARP spoofing |
 | `netlab-macflood` | L2 | MAC flooding (CAM overflow) |
 | `netlab-stp` | L2 | STP root takeover |
+| `netlab-vlan` | L2 | VLAN hopping |
 
 ## Contributing
 
