@@ -49,6 +49,7 @@ netlab-8021x = { workspace = true }
 netlab-macsec = { workspace = true }
 netlab-ipspoof = { workspace = true }
 netlab-icmp = { workspace = true }
+netlab-frag = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -79,6 +80,7 @@ dev = [
     "netlab-macsec",
     "netlab-ipspoof",
     "netlab-icmp",
+    "netlab-frag",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
