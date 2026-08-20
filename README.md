@@ -69,6 +69,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-ids-evasion` | L4 | NIDS evasion (insertion/evasion) (flagship) |
 | `netlab-covert` | L4 | Covert channels |
 | `netlab-dns` | Svc | DNS spoofing / cache poisoning |
+| `netlab-dnstunnel` | Svc | DNS tunneling |
 
 ## Contributing
 
