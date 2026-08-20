@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Chris <goabonga@pm.me>
+
+# Zensical site config. The per-layer sections and per-PoC pages are added to
+# the nav by scripts/gen_docs.py --zensical as modules land.
+
+[project]
+site_name = "netsec-lab"
+site_description = "Hands-on network-security training: layered attack/detect/defend PoC."
+site_author = "Chris"
+site_url = "https://goabonga.github.io/netsec-lab/"
+repo_url = "https://github.com/goabonga/netsec-lab"
+repo_name = "goabonga/netsec-lab"
+nav = [
+    { "Introduction" = "index.md" },
+    { "Lab setup" = "lab-setup.md" },
+    { "Methodology" = "methodology.md" },
+    { "Versions" = "versions.md" },
+]
+
+# Declaring this table overrides zensical's DEFAULT_MARKDOWN_EXTENSIONS wholesale,
+# so the full default set is restored verbatim here (fenced code blocks need
+# pymdownx.superfences + pymdownx.highlight) and the `macros` extension is added.
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+toc.permalink = true
+pymdownx.arithmatex.generic = true
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}
+"zensical.extensions.macros" = {}
+
+# Per-component versions surfaced on docs/versions.md through the
+# `macros` extension ({{ config.extra.versions.* }}). multicz rewrites
+# each value on bump: every component lists the matching key in its
+# `bump_files` (see multicz.toml), and the `docs` component `depends_on`
+# them all so this page is regenerated whenever any version changes.
+#
+# NOTE: keys use underscores (netlab_dhcp, not netlab-dhcp) - a dash reads
+# as subtraction inside the Jinja `{{ ... }}` macro expression.
+[project.extra.versions]
+docs = "0.0.0"

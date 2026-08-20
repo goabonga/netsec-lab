@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Chris <goabonga@pm.me>
+
+[project]
+name = "netsec-lab"
+version = "0.0.0"
+description = "Hands-on network-security training: layered attack/detect/defend PoC (L2-L4 + network services), each an independent uv package, all replayable in isolated netns/veth labs."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Chris", email = "goabonga@pm.me" }]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+doc = ["zensical", "markdown>=3.7"]
