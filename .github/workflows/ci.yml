@@ -1816,6 +1816,51 @@ jobs:
           module: netlab_mdns_llmnr
           check: test
 
+  netlab-kerberos-net-lint:
+    name: lint (netlab-kerberos-net)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-kerberos-net')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-kerberos-net
+          module: netlab_kerberos_net
+          check: lint
+
+  netlab-kerberos-net-typecheck:
+    name: typecheck (netlab-kerberos-net)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-kerberos-net')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-kerberos-net
+          module: netlab_kerberos_net
+          check: typecheck
+
+  netlab-kerberos-net-test:
+    name: test (netlab-kerberos-net)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-kerberos-net')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-kerberos-net
+          module: netlab_kerberos_net
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1938,6 +1983,9 @@ jobs:
       - netlab-mdns-llmnr-lint
       - netlab-mdns-llmnr-typecheck
       - netlab-mdns-llmnr-test
+      - netlab-kerberos-net-lint
+      - netlab-kerberos-net-typecheck
+      - netlab-kerberos-net-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -3232,6 +3280,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-mdns-llmnr)
           TAG="netlab-mdns-llmnr-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-kerberos-net:
+    name: release (netlab-kerberos-net)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-kerberos-net')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-kerberos-net
+        run: uv build --package netlab-kerberos-net --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-kerberos-net)
+          TAG="netlab-kerberos-net-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

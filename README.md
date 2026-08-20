@@ -75,6 +75,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-snmp` | Svc | SNMP enumeration |
 | `netlab-ntp` | Svc | NTP time-shift MITM |
 | `netlab-mdns-llmnr` | Svc | mDNS/LLMNR/NBT-NS poisoning |
+| `netlab-kerberos-net` | Svc | Kerberos on the wire |
 
 ## Contributing
 

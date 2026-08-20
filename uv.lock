@@ -27,6 +27,7 @@ members = [
     "netlab-igmp",
     "netlab-ipspoof",
     "netlab-ipv6-ra",
+    "netlab-kerberos-net",
     "netlab-lldp-med",
     "netlab-macflood",
     "netlab-macsec",
@@ -963,6 +964,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-kerberos-net"
+version = "0.0.0"
+source = { editable = "packages/netlab-kerberos-net" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-lldp-med"
 version = "0.0.0"
 source = { editable = "packages/netlab-lldp-med" }
@@ -1389,6 +1410,7 @@ dev = [
     { name = "netlab-igmp" },
     { name = "netlab-ipspoof" },
     { name = "netlab-ipv6-ra" },
+    { name = "netlab-kerberos-net" },
     { name = "netlab-lldp-med" },
     { name = "netlab-macflood" },
     { name = "netlab-macsec" },
@@ -1444,6 +1466,7 @@ dev = [
     { name = "netlab-igmp", editable = "packages/netlab-igmp" },
     { name = "netlab-ipspoof", editable = "packages/netlab-ipspoof" },
     { name = "netlab-ipv6-ra", editable = "packages/netlab-ipv6-ra" },
+    { name = "netlab-kerberos-net", editable = "packages/netlab-kerberos-net" },
     { name = "netlab-lldp-med", editable = "packages/netlab-lldp-med" },
     { name = "netlab-macflood", editable = "packages/netlab-macflood" },
     { name = "netlab-macsec", editable = "packages/netlab-macsec" },
