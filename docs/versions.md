@@ -27,3 +27,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-ipspoof` | {{ config.extra.versions.netlab_ipspoof }} |
 | `netlab-icmp` | {{ config.extra.versions.netlab_icmp }} |
 | `netlab-frag` | {{ config.extra.versions.netlab_frag }} |
+| `netlab-routing` | {{ config.extra.versions.netlab_routing }} |
