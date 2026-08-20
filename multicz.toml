@@ -32,7 +32,7 @@ types = ["perf"]
 
 [components.docs]
 paths = ["docs/**", "zensical.toml"]
-depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan", "netlab-ipv6-ra", "netlab-discovery", "netlab-lldp-med", "netlab-8021x", "netlab-macsec", "netlab-ipspoof", "netlab-icmp", "netlab-frag", "netlab-routing", "netlab-igmp", "netlab-bgp", "netlab-vrrp-hsrp", "netlab-portscan", "netlab-synflood", "netlab-tcphijack", "netlab-amplif"]
+depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan", "netlab-ipv6-ra", "netlab-discovery", "netlab-lldp-med", "netlab-8021x", "netlab-macsec", "netlab-ipspoof", "netlab-icmp", "netlab-frag", "netlab-routing", "netlab-igmp", "netlab-bgp", "netlab-vrrp-hsrp", "netlab-portscan", "netlab-synflood", "netlab-tcphijack", "netlab-amplif", "netlab-ids-evasion"]
 changelog = "docs/CHANGELOG.md"
 bump_files = [
     { file = "zensical.toml", key = "project.extra.versions.docs" },
@@ -364,5 +364,16 @@ bump_files = [
     { file = "packages/netlab-amplif/pyproject.toml", key = "project.version" },
     { file = "packages/netlab-amplif/src/netlab_amplif/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
     { file = "zensical.toml", key = "project.extra.versions.netlab_amplif" },
+]
+post_bump = ["uv lock"]
+
+[components.netlab-ids-evasion]
+paths = ["packages/netlab-ids-evasion/**"]
+depends_on = ["netlab-core"]
+changelog = "packages/netlab-ids-evasion/CHANGELOG.md"
+bump_files = [
+    { file = "packages/netlab-ids-evasion/pyproject.toml", key = "project.version" },
+    { file = "packages/netlab-ids-evasion/src/netlab_ids_evasion/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
+    { file = "zensical.toml", key = "project.extra.versions.netlab_ids_evasion" },
 ]
 post_bump = ["uv lock"]

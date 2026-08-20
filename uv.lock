@@ -19,6 +19,7 @@ members = [
     "netlab-frag",
     "netlab-hw-implant",
     "netlab-icmp",
+    "netlab-ids-evasion",
     "netlab-igmp",
     "netlab-ipspoof",
     "netlab-ipv6-ra",
@@ -794,6 +795,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-ids-evasion"
+version = "0.0.0"
+source = { editable = "packages/netlab-ids-evasion" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-igmp"
 version = "0.0.0"
 source = { editable = "packages/netlab-igmp" }
@@ -1192,6 +1213,7 @@ dev = [
     { name = "netlab-frag" },
     { name = "netlab-hw-implant" },
     { name = "netlab-icmp" },
+    { name = "netlab-ids-evasion" },
     { name = "netlab-igmp" },
     { name = "netlab-ipspoof" },
     { name = "netlab-ipv6-ra" },
@@ -1238,6 +1260,7 @@ dev = [
     { name = "netlab-frag", editable = "packages/netlab-frag" },
     { name = "netlab-hw-implant", editable = "packages/netlab-hw-implant" },
     { name = "netlab-icmp", editable = "packages/netlab-icmp" },
+    { name = "netlab-ids-evasion", editable = "packages/netlab-ids-evasion" },
     { name = "netlab-igmp", editable = "packages/netlab-igmp" },
     { name = "netlab-ipspoof", editable = "packages/netlab-ipspoof" },
     { name = "netlab-ipv6-ra", editable = "packages/netlab-ipv6-ra" },

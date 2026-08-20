@@ -58,6 +58,7 @@ netlab-portscan = { workspace = true }
 netlab-synflood = { workspace = true }
 netlab-tcphijack = { workspace = true }
 netlab-amplif = { workspace = true }
+netlab-ids-evasion = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -97,6 +98,7 @@ dev = [
     "netlab-synflood",
     "netlab-tcphijack",
     "netlab-amplif",
+    "netlab-ids-evasion",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

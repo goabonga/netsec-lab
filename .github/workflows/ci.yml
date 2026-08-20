@@ -1411,6 +1411,51 @@ jobs:
           module: netlab_amplif
           check: test
 
+  netlab-ids-evasion-lint:
+    name: lint (netlab-ids-evasion)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-ids-evasion')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-ids-evasion
+          module: netlab_ids_evasion
+          check: lint
+
+  netlab-ids-evasion-typecheck:
+    name: typecheck (netlab-ids-evasion)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-ids-evasion')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-ids-evasion
+          module: netlab_ids_evasion
+          check: typecheck
+
+  netlab-ids-evasion-test:
+    name: test (netlab-ids-evasion)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-ids-evasion')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-ids-evasion
+          module: netlab_ids_evasion
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1506,6 +1551,9 @@ jobs:
       - netlab-amplif-lint
       - netlab-amplif-typecheck
       - netlab-amplif-test
+      - netlab-ids-evasion-lint
+      - netlab-ids-evasion-typecheck
+      - netlab-ids-evasion-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2512,6 +2560,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-amplif)
           TAG="netlab-amplif-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-ids-evasion:
+    name: release (netlab-ids-evasion)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-ids-evasion')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-ids-evasion
+        run: uv build --package netlab-ids-evasion --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-ids-evasion)
+          TAG="netlab-ids-evasion-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
