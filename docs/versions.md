@@ -29,3 +29,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-frag` | {{ config.extra.versions.netlab_frag }} |
 | `netlab-routing` | {{ config.extra.versions.netlab_routing }} |
 | `netlab-igmp` | {{ config.extra.versions.netlab_igmp }} |
+| `netlab-bgp` | {{ config.extra.versions.netlab_bgp }} |

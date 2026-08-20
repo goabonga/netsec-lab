@@ -10,6 +10,7 @@ resolution-markers = [
 members = [
     "netlab-8021x",
     "netlab-arp",
+    "netlab-bgp",
     "netlab-core",
     "netlab-dhcp",
     "netlab-discovery",
@@ -614,6 +615,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-bgp"
+version = "0.0.0"
+source = { editable = "packages/netlab-bgp" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-core"
 version = "0.0.0"
 source = { editable = "packages/netlab-core" }
@@ -1057,6 +1078,7 @@ dev = [
     { name = "mypy" },
     { name = "netlab-8021x" },
     { name = "netlab-arp" },
+    { name = "netlab-bgp" },
     { name = "netlab-core" },
     { name = "netlab-dhcp" },
     { name = "netlab-discovery" },
@@ -1097,6 +1119,7 @@ dev = [
     { name = "mypy", specifier = ">=1.18" },
     { name = "netlab-8021x", editable = "packages/netlab-8021x" },
     { name = "netlab-arp", editable = "packages/netlab-arp" },
+    { name = "netlab-bgp", editable = "packages/netlab-bgp" },
     { name = "netlab-core", editable = "packages/netlab-core" },
     { name = "netlab-dhcp", editable = "packages/netlab-dhcp" },
     { name = "netlab-discovery", editable = "packages/netlab-discovery" },

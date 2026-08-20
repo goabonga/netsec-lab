@@ -396,6 +396,20 @@ jobs:
           path: packages/netlab-igmp
           module: netlab_igmp
 
+  netlab-bgp-check:
+    name: check (netlab-bgp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-bgp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-bgp
+          module: netlab_bgp
+
   release-bump:
     name: release-bump
     needs:
@@ -425,6 +439,7 @@ jobs:
       - netlab-frag-check
       - netlab-routing-check
       - netlab-igmp-check
+      - netlab-bgp-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -1239,6 +1254,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-igmp)
           TAG="netlab-igmp-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-bgp:
+    name: release (netlab-bgp)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-bgp')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-bgp
+        run: uv build --package netlab-bgp --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-bgp)
+          TAG="netlab-bgp-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
