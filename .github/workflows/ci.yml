@@ -270,6 +270,20 @@ jobs:
           path: packages/netlab-ipv6-ra
           module: netlab_ipv6_ra
 
+  netlab-discovery-check:
+    name: check (netlab-discovery)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-discovery')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-discovery
+          module: netlab_discovery
+
   release-bump:
     name: release-bump
     needs:
@@ -290,6 +304,7 @@ jobs:
       - netlab-stp-check
       - netlab-vlan-check
       - netlab-ipv6-ra-check
+      - netlab-discovery-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -816,6 +831,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-ipv6-ra)
           TAG="netlab-ipv6-ra-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-discovery:
+    name: release (netlab-discovery)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-discovery')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-discovery
+        run: uv build --package netlab-discovery --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-discovery)
+          TAG="netlab-discovery-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
