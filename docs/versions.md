@@ -47,3 +47,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-kerberos-net` | {{ config.extra.versions.netlab_kerberos_net }} |
 | `netlab-quic` | {{ config.extra.versions.netlab_quic }} |
 | `netlab-ids` | {{ config.extra.versions.netlab_ids }} |
+| `netlab-firewall` | {{ config.extra.versions.netlab_firewall }} |
