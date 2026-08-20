@@ -54,6 +54,7 @@ netlab-routing = { workspace = true }
 netlab-igmp = { workspace = true }
 netlab-bgp = { workspace = true }
 netlab-vrrp-hsrp = { workspace = true }
+netlab-portscan = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -89,6 +90,7 @@ dev = [
     "netlab-igmp",
     "netlab-bgp",
     "netlab-vrrp-hsrp",
+    "netlab-portscan",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

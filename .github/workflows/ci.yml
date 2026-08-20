@@ -1231,6 +1231,51 @@ jobs:
           module: netlab_vrrp_hsrp
           check: test
 
+  netlab-portscan-lint:
+    name: lint (netlab-portscan)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-portscan')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-portscan
+          module: netlab_portscan
+          check: lint
+
+  netlab-portscan-typecheck:
+    name: typecheck (netlab-portscan)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-portscan')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-portscan
+          module: netlab_portscan
+          check: typecheck
+
+  netlab-portscan-test:
+    name: test (netlab-portscan)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-portscan')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-portscan
+          module: netlab_portscan
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1314,6 +1359,9 @@ jobs:
       - netlab-vrrp-hsrp-lint
       - netlab-vrrp-hsrp-typecheck
       - netlab-vrrp-hsrp-test
+      - netlab-portscan-lint
+      - netlab-portscan-typecheck
+      - netlab-portscan-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -2192,6 +2240,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-vrrp-hsrp)
           TAG="netlab-vrrp-hsrp-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-portscan:
+    name: release (netlab-portscan)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-portscan')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-portscan
+        run: uv build --package netlab-portscan --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-portscan)
+          TAG="netlab-portscan-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

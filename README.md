@@ -62,6 +62,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-igmp` | L3 | IGMP snooping / spoofing |
 | `netlab-bgp` | L3 | BGP hijack (simulated) (flagship) |
 | `netlab-vrrp-hsrp` | L3 | FHRP takeover (VRRP/HSRP) |
+| `netlab-portscan` | L4 | Port scanning & fingerprinting |
 
 ## Contributing
 
