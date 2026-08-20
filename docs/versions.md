@@ -43,3 +43,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-tls` | {{ config.extra.versions.netlab_tls }} |
 | `netlab-snmp` | {{ config.extra.versions.netlab_snmp }} |
 | `netlab-ntp` | {{ config.extra.versions.netlab_ntp }} |
+| `netlab-mdns-llmnr` | {{ config.extra.versions.netlab_mdns_llmnr }} |

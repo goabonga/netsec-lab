@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Chris <goabonga@pm.me>
+
+[project]
+name = "netlab-mdns-llmnr"
+version = "0.0.0"
+description = "netsec-lab Services PoC: mDNS/LLMNR/NBT-NS poisoning. Poison LAN name resolution (network dimension, on the wire)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Chris", email = "goabonga@pm.me" }]
+keywords = ["network-security", "training", "poc", "mdns-llmnr"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Education",
+    "Topic :: Security",
+]
+dependencies = ["netlab-core"]
+
+[project.optional-dependencies]
+capture = ["scapy>=2.5"]
+
+[project.scripts]
+netlab-mdns-llmnr = "netlab_mdns_llmnr.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/goabonga/netsec-lab"
+Source = "https://github.com/goabonga/netsec-lab/tree/main/packages/netlab-mdns-llmnr"
+Issues = "https://github.com/goabonga/netsec-lab/issues"
+Changelog = "https://github.com/goabonga/netsec-lab/blob/main/packages/netlab-mdns-llmnr/CHANGELOG.md"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/netlab_mdns_llmnr"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/netlab_mdns_llmnr", "tests", "README.md", "CHANGELOG.md"]
