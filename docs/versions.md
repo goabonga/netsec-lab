@@ -12,3 +12,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-wpa-crack` | {{ config.extra.versions.netlab_wpa_crack }} |
 | `netlab-wps-brute` | {{ config.extra.versions.netlab_wps_brute }} |
 | `netlab-tap` | {{ config.extra.versions.netlab_tap }} |
+| `netlab-tempest` | {{ config.extra.versions.netlab_tempest }} |

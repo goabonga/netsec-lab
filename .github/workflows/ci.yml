@@ -158,6 +158,20 @@ jobs:
           path: packages/netlab-tap
           module: netlab_tap
 
+  netlab-tempest-check:
+    name: check (netlab-tempest)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-tempest')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-tempest
+          module: netlab_tempest
+
   release-bump:
     name: release-bump
     needs:
@@ -170,6 +184,7 @@ jobs:
       - netlab-wpa-crack-check
       - netlab-wps-brute-check
       - netlab-tap-check
+      - netlab-tempest-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -440,6 +455,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-tap)
           TAG="netlab-tap-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-tempest:
+    name: release (netlab-tempest)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-tempest')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-tempest
+        run: uv build --package netlab-tempest --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-tempest)
+          TAG="netlab-tempest-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

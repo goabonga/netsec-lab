@@ -35,6 +35,7 @@ netlab-evil-twin = { workspace = true }
 netlab-wpa-crack = { workspace = true }
 netlab-wps-brute = { workspace = true }
 netlab-tap = { workspace = true }
+netlab-tempest = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -51,6 +52,7 @@ dev = [
     "netlab-wpa-crack",
     "netlab-wps-brute",
     "netlab-tap",
+    "netlab-tempest",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
