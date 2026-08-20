@@ -66,6 +66,7 @@ netlab-icmptunnel = { workspace = true }
 netlab-tls = { workspace = true }
 netlab-snmp = { workspace = true }
 netlab-ntp = { workspace = true }
+netlab-mdns-llmnr = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -113,6 +114,7 @@ dev = [
     "netlab-tls",
     "netlab-snmp",
     "netlab-ntp",
+    "netlab-mdns-llmnr",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

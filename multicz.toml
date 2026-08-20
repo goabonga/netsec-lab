@@ -32,7 +32,7 @@ types = ["perf"]
 
 [components.docs]
 paths = ["docs/**", "zensical.toml"]
-depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan", "netlab-ipv6-ra", "netlab-discovery", "netlab-lldp-med", "netlab-8021x", "netlab-macsec", "netlab-ipspoof", "netlab-icmp", "netlab-frag", "netlab-routing", "netlab-igmp", "netlab-bgp", "netlab-vrrp-hsrp", "netlab-portscan", "netlab-synflood", "netlab-tcphijack", "netlab-amplif", "netlab-ids-evasion", "netlab-covert", "netlab-dns", "netlab-dnstunnel", "netlab-icmptunnel", "netlab-tls", "netlab-snmp", "netlab-ntp"]
+depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan", "netlab-ipv6-ra", "netlab-discovery", "netlab-lldp-med", "netlab-8021x", "netlab-macsec", "netlab-ipspoof", "netlab-icmp", "netlab-frag", "netlab-routing", "netlab-igmp", "netlab-bgp", "netlab-vrrp-hsrp", "netlab-portscan", "netlab-synflood", "netlab-tcphijack", "netlab-amplif", "netlab-ids-evasion", "netlab-covert", "netlab-dns", "netlab-dnstunnel", "netlab-icmptunnel", "netlab-tls", "netlab-snmp", "netlab-ntp", "netlab-mdns-llmnr"]
 changelog = "docs/CHANGELOG.md"
 bump_files = [
     { file = "zensical.toml", key = "project.extra.versions.docs" },
@@ -452,5 +452,16 @@ bump_files = [
     { file = "packages/netlab-ntp/pyproject.toml", key = "project.version" },
     { file = "packages/netlab-ntp/src/netlab_ntp/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
     { file = "zensical.toml", key = "project.extra.versions.netlab_ntp" },
+]
+post_bump = ["uv lock"]
+
+[components.netlab-mdns-llmnr]
+paths = ["packages/netlab-mdns-llmnr/**"]
+depends_on = ["netlab-core"]
+changelog = "packages/netlab-mdns-llmnr/CHANGELOG.md"
+bump_files = [
+    { file = "packages/netlab-mdns-llmnr/pyproject.toml", key = "project.version" },
+    { file = "packages/netlab-mdns-llmnr/src/netlab_mdns_llmnr/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
+    { file = "zensical.toml", key = "project.extra.versions.netlab_mdns_llmnr" },
 ]
 post_bump = ["uv lock"]

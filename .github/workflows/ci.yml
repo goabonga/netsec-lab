@@ -1771,6 +1771,51 @@ jobs:
           module: netlab_ntp
           check: test
 
+  netlab-mdns-llmnr-lint:
+    name: lint (netlab-mdns-llmnr)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-mdns-llmnr')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-mdns-llmnr
+          module: netlab_mdns_llmnr
+          check: lint
+
+  netlab-mdns-llmnr-typecheck:
+    name: typecheck (netlab-mdns-llmnr)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-mdns-llmnr')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-mdns-llmnr
+          module: netlab_mdns_llmnr
+          check: typecheck
+
+  netlab-mdns-llmnr-test:
+    name: test (netlab-mdns-llmnr)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-mdns-llmnr')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-mdns-llmnr
+          module: netlab_mdns_llmnr
+          check: test
+
   release-bump:
     name: release-bump
     needs:
@@ -1890,6 +1935,9 @@ jobs:
       - netlab-ntp-lint
       - netlab-ntp-typecheck
       - netlab-ntp-test
+      - netlab-mdns-llmnr-lint
+      - netlab-mdns-llmnr-typecheck
+      - netlab-mdns-llmnr-test
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -3152,6 +3200,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-ntp)
           TAG="netlab-ntp-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-mdns-llmnr:
+    name: release (netlab-mdns-llmnr)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-mdns-llmnr')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-mdns-llmnr
+        run: uv build --package netlab-mdns-llmnr --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-mdns-llmnr)
+          TAG="netlab-mdns-llmnr-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 
