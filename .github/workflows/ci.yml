@@ -200,6 +200,20 @@ jobs:
           path: packages/netlab-dhcp
           module: netlab_dhcp
 
+  netlab-arp-check:
+    name: check (netlab-arp)
+    needs: [detect, headers]
+    if: contains(fromJson(needs.detect.outputs.changed), 'netlab-arp')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/python-check
+        with:
+          path: packages/netlab-arp
+          module: netlab_arp
+
   release-bump:
     name: release-bump
     needs:
@@ -215,6 +229,7 @@ jobs:
       - netlab-tempest-check
       - netlab-hw-implant-check
       - netlab-dhcp-check
+      - netlab-arp-check
     if: >-
       github.event_name == 'push' && github.ref == 'refs/heads/main'
       && !failure() && !cancelled()
@@ -581,6 +596,38 @@ jobs:
           set -euo pipefail
           V=$(uv tool run multicz get netlab-dhcp)
           TAG="netlab-dhcp-v$V"
+          uv tool run multicz release-notes --tag "$TAG" \
+            | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
+
+  release-netlab-arp:
+    name: release (netlab-arp)
+    needs: [release-bump]
+    if: >-
+      !failure() && !cancelled()
+      && contains(fromJson(needs.release-bump.outputs.bumped), 'netlab-arp')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-suffix: ${{ github.job }}
+      - name: Install multicz
+        run: uv tool install multicz
+      - name: Build netlab-arp
+        run: uv build --package netlab-arp --out-dir dist
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V=$(uv tool run multicz get netlab-arp)
+          TAG="netlab-arp-v$V"
           uv tool run multicz release-notes --tag "$TAG" \
             | gh release create "$TAG" --title "$TAG" --notes-file - dist/*
 

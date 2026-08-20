@@ -8,6 +8,7 @@ resolution-markers = [
 
 [manifest]
 members = [
+    "netlab-arp",
     "netlab-core",
     "netlab-dhcp",
     "netlab-evil-twin",
@@ -560,6 +561,26 @@ wheels = [
 ]
 
 [[package]]
+name = "netlab-arp"
+version = "0.0.0"
+source = { editable = "packages/netlab-arp" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-core"
 version = "0.0.0"
 source = { editable = "packages/netlab-core" }
@@ -761,6 +782,7 @@ source = { virtual = "." }
 [package.dev-dependencies]
 dev = [
     { name = "mypy" },
+    { name = "netlab-arp" },
     { name = "netlab-core" },
     { name = "netlab-dhcp" },
     { name = "netlab-evil-twin" },
@@ -787,6 +809,7 @@ doc = [
 [package.metadata.requires-dev]
 dev = [
     { name = "mypy", specifier = ">=1.18" },
+    { name = "netlab-arp", editable = "packages/netlab-arp" },
     { name = "netlab-core", editable = "packages/netlab-core" },
     { name = "netlab-dhcp", editable = "packages/netlab-dhcp" },
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
