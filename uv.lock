@@ -34,6 +34,7 @@ members = [
     "netlab-mdns-llmnr",
     "netlab-ntp",
     "netlab-portscan",
+    "netlab-quic",
     "netlab-routing",
     "netlab-snmp",
     "netlab-stp",
@@ -1104,6 +1105,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-quic"
+version = "0.0.0"
+source = { editable = "packages/netlab-quic" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-routing"
 version = "0.0.0"
 source = { editable = "packages/netlab-routing" }
@@ -1417,6 +1438,7 @@ dev = [
     { name = "netlab-mdns-llmnr" },
     { name = "netlab-ntp" },
     { name = "netlab-portscan" },
+    { name = "netlab-quic" },
     { name = "netlab-routing" },
     { name = "netlab-snmp" },
     { name = "netlab-stp" },
@@ -1473,6 +1495,7 @@ dev = [
     { name = "netlab-mdns-llmnr", editable = "packages/netlab-mdns-llmnr" },
     { name = "netlab-ntp", editable = "packages/netlab-ntp" },
     { name = "netlab-portscan", editable = "packages/netlab-portscan" },
+    { name = "netlab-quic", editable = "packages/netlab-quic" },
     { name = "netlab-routing", editable = "packages/netlab-routing" },
     { name = "netlab-snmp", editable = "packages/netlab-snmp" },
     { name = "netlab-stp", editable = "packages/netlab-stp" },
