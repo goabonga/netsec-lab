@@ -14,6 +14,7 @@ members = [
     "netlab-evil-twin",
     "netlab-hw-implant",
     "netlab-macflood",
+    "netlab-stp",
     "netlab-tap",
     "netlab-tempest",
     "netlab-wifi-deauth",
@@ -676,6 +677,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-stp"
+version = "0.0.0"
+source = { editable = "packages/netlab-stp" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-tap"
 version = "0.0.0"
 source = { editable = "packages/netlab-tap" }
@@ -809,6 +830,7 @@ dev = [
     { name = "netlab-evil-twin" },
     { name = "netlab-hw-implant" },
     { name = "netlab-macflood" },
+    { name = "netlab-stp" },
     { name = "netlab-tap" },
     { name = "netlab-tempest" },
     { name = "netlab-wifi-deauth" },
@@ -837,6 +859,7 @@ dev = [
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
     { name = "netlab-hw-implant", editable = "packages/netlab-hw-implant" },
     { name = "netlab-macflood", editable = "packages/netlab-macflood" },
+    { name = "netlab-stp", editable = "packages/netlab-stp" },
     { name = "netlab-tap", editable = "packages/netlab-tap" },
     { name = "netlab-tempest", editable = "packages/netlab-tempest" },
     { name = "netlab-wifi-deauth", editable = "packages/netlab-wifi-deauth" },
