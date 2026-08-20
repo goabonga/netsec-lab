@@ -15,6 +15,7 @@ members = [
     "netlab-discovery",
     "netlab-evil-twin",
     "netlab-hw-implant",
+    "netlab-ipspoof",
     "netlab-ipv6-ra",
     "netlab-lldp-med",
     "netlab-macflood",
@@ -703,6 +704,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-ipspoof"
+version = "0.0.0"
+source = { editable = "packages/netlab-ipspoof" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-ipv6-ra"
 version = "0.0.0"
 source = { editable = "packages/netlab-ipv6-ra" }
@@ -957,6 +978,7 @@ dev = [
     { name = "netlab-discovery" },
     { name = "netlab-evil-twin" },
     { name = "netlab-hw-implant" },
+    { name = "netlab-ipspoof" },
     { name = "netlab-ipv6-ra" },
     { name = "netlab-lldp-med" },
     { name = "netlab-macflood" },
@@ -992,6 +1014,7 @@ dev = [
     { name = "netlab-discovery", editable = "packages/netlab-discovery" },
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
     { name = "netlab-hw-implant", editable = "packages/netlab-hw-implant" },
+    { name = "netlab-ipspoof", editable = "packages/netlab-ipspoof" },
     { name = "netlab-ipv6-ra", editable = "packages/netlab-ipv6-ra" },
     { name = "netlab-lldp-med", editable = "packages/netlab-lldp-med" },
     { name = "netlab-macflood", editable = "packages/netlab-macflood" },

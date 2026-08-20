@@ -55,6 +55,7 @@ Modules are grouped by network layer - 46 PoC plus the shared foundation. Attack
 | `netlab-lldp-med` | L2 | LLDP-MED abuse |
 | `netlab-8021x` | L2 | NAC bypass (802.1X) |
 | `netlab-macsec` | L2 | MACsec / MKA |
+| `netlab-ipspoof` | L3 | IP spoofing |
 
 ## Contributing
 
