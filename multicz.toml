@@ -32,7 +32,7 @@ types = ["perf"]
 
 [components.docs]
 paths = ["docs/**", "zensical.toml"]
-depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan", "netlab-ipv6-ra", "netlab-discovery", "netlab-lldp-med", "netlab-8021x", "netlab-macsec", "netlab-ipspoof", "netlab-icmp", "netlab-frag", "netlab-routing", "netlab-igmp", "netlab-bgp", "netlab-vrrp-hsrp", "netlab-portscan", "netlab-synflood", "netlab-tcphijack", "netlab-amplif", "netlab-ids-evasion", "netlab-covert", "netlab-dns", "netlab-dnstunnel", "netlab-icmptunnel", "netlab-tls", "netlab-snmp", "netlab-ntp", "netlab-mdns-llmnr", "netlab-kerberos-net", "netlab-quic", "netlab-ids", "netlab-firewall", "netlab-netflow", "netlab-pcap-forensics"]
+depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan", "netlab-ipv6-ra", "netlab-discovery", "netlab-lldp-med", "netlab-8021x", "netlab-macsec", "netlab-ipspoof", "netlab-icmp", "netlab-frag", "netlab-routing", "netlab-igmp", "netlab-bgp", "netlab-vrrp-hsrp", "netlab-portscan", "netlab-synflood", "netlab-tcphijack", "netlab-amplif", "netlab-ids-evasion", "netlab-covert", "netlab-dns", "netlab-dnstunnel", "netlab-icmptunnel", "netlab-tls", "netlab-snmp", "netlab-ntp", "netlab-mdns-llmnr", "netlab-kerberos-net", "netlab-quic", "netlab-ids", "netlab-firewall", "netlab-netflow", "netlab-pcap-forensics", "netlab-tls-inspect"]
 changelog = "docs/CHANGELOG.md"
 bump_files = [
     { file = "zensical.toml", key = "project.extra.versions.docs" },
@@ -529,5 +529,16 @@ bump_files = [
     { file = "packages/netlab-pcap-forensics/pyproject.toml", key = "project.version" },
     { file = "packages/netlab-pcap-forensics/src/netlab_pcap_forensics/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
     { file = "zensical.toml", key = "project.extra.versions.netlab_pcap_forensics" },
+]
+post_bump = ["uv lock"]
+
+[components.netlab-tls-inspect]
+paths = ["packages/netlab-tls-inspect/**"]
+depends_on = ["netlab-core"]
+changelog = "packages/netlab-tls-inspect/CHANGELOG.md"
+bump_files = [
+    { file = "packages/netlab-tls-inspect/pyproject.toml", key = "project.version" },
+    { file = "packages/netlab-tls-inspect/src/netlab_tls_inspect/__version__.py", key = "regex:__version__\\s*=\\s*[\"\x27]([^\"\x27]+)[\"\x27]" },
+    { file = "zensical.toml", key = "project.extra.versions.netlab_tls_inspect" },
 ]
 post_bump = ["uv lock"]

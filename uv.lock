@@ -47,6 +47,7 @@ members = [
     "netlab-tcphijack",
     "netlab-tempest",
     "netlab-tls",
+    "netlab-tls-inspect",
     "netlab-vlan",
     "netlab-vrrp-hsrp",
     "netlab-wifi-deauth",
@@ -1369,6 +1370,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-tls-inspect"
+version = "0.0.0"
+source = { editable = "packages/netlab-tls-inspect" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-vlan"
 version = "0.0.0"
 source = { editable = "packages/netlab-vlan" }
@@ -1535,6 +1556,7 @@ dev = [
     { name = "netlab-tcphijack" },
     { name = "netlab-tempest" },
     { name = "netlab-tls" },
+    { name = "netlab-tls-inspect" },
     { name = "netlab-vlan" },
     { name = "netlab-vrrp-hsrp" },
     { name = "netlab-wifi-deauth" },
@@ -1596,6 +1618,7 @@ dev = [
     { name = "netlab-tcphijack", editable = "packages/netlab-tcphijack" },
     { name = "netlab-tempest", editable = "packages/netlab-tempest" },
     { name = "netlab-tls", editable = "packages/netlab-tls" },
+    { name = "netlab-tls-inspect", editable = "packages/netlab-tls-inspect" },
     { name = "netlab-vlan", editable = "packages/netlab-vlan" },
     { name = "netlab-vrrp-hsrp", editable = "packages/netlab-vrrp-hsrp" },
     { name = "netlab-wifi-deauth", editable = "packages/netlab-wifi-deauth" },

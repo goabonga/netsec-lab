@@ -20,7 +20,7 @@ nav = [
     { 'Layer 3 - Network' = [{ "Overview" = "layer-3-network/index.md" }, { 'IP spoofing' = "layer-3-network/ip-spoofing.md" }, { 'ICMP redirect & tunneling' = "layer-3-network/icmp.md" }, { 'Fragmentation & IDS evasion' = "layer-3-network/fragmentation.md" }, { 'Routing injection (RIP/OSPF)' = "layer-3-network/routing.md" }, { 'IGMP snooping / spoofing' = "layer-3-network/igmp-multicast.md" }, { 'BGP hijack (simulated)' = "layer-3-network/bgp-hijack.md" }, { 'FHRP takeover (VRRP/HSRP)' = "layer-3-network/vrrp-hsrp.md" }] },
     { 'Layer 4 - Transport' = [{ "Overview" = "layer-4-transport/index.md" }, { 'Port scanning & fingerprinting' = "layer-4-transport/port-scanning.md" }, { 'TCP SYN flood' = "layer-4-transport/syn-flood.md" }, { 'TCP session hijacking' = "layer-4-transport/tcp-hijacking.md" }, { 'Reflection & amplification' = "layer-4-transport/amplification.md" }, { 'NIDS evasion (insertion/evasion)' = "layer-4-transport/ids-evasion.md" }, { 'Covert channels' = "layer-4-transport/covert-channels.md" }] },
     { 'Network Services' = [{ "Overview" = "network-services/index.md" }, { 'DNS spoofing / cache poisoning' = "network-services/dns-spoofing.md" }, { 'DNS tunneling' = "network-services/dns-tunneling.md" }, { 'ICMP tunneling' = "network-services/icmp-tunneling.md" }, { 'TLS downgrade / MITM' = "network-services/tls.md" }, { 'SNMP enumeration' = "network-services/snmp.md" }, { 'NTP time-shift MITM' = "network-services/ntp.md" }, { 'mDNS/LLMNR/NBT-NS poisoning' = "network-services/mdns-llmnr.md" }, { 'Kerberos on the wire' = "network-services/kerberos-net.md" }, { 'QUIC / HTTP3 fingerprinting' = "network-services/quic.md" }] },
-    { 'Defensive Tooling' = [{ "Overview" = "defensive-tooling/index.md" }, { 'IDS rule harness' = "defensive-tooling/ids.md" }, { 'Firewall policy' = "defensive-tooling/firewall.md" }, { 'NetFlow / IPFIX analysis' = "defensive-tooling/netflow.md" }, { 'PCAP forensics' = "defensive-tooling/pcap-forensics.md" }] },
+    { 'Defensive Tooling' = [{ "Overview" = "defensive-tooling/index.md" }, { 'IDS rule harness' = "defensive-tooling/ids.md" }, { 'Firewall policy' = "defensive-tooling/firewall.md" }, { 'NetFlow / IPFIX analysis' = "defensive-tooling/netflow.md" }, { 'PCAP forensics' = "defensive-tooling/pcap-forensics.md" }, { 'TLS inspection proxy' = "defensive-tooling/tls-inspect.md" }] },
     { "Versions" = "versions.md" },
 ]
 
@@ -113,3 +113,4 @@ netlab_ids = "0.0.0"
 netlab_firewall = "0.0.0"
 netlab_netflow = "0.0.0"
 netlab_pcap_forensics = "0.0.0"
+netlab_tls_inspect = "0.0.0"

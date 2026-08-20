@@ -73,6 +73,7 @@ netlab-ids = { workspace = true }
 netlab-firewall = { workspace = true }
 netlab-netflow = { workspace = true }
 netlab-pcap-forensics = { workspace = true }
+netlab-tls-inspect = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -127,6 +128,7 @@ dev = [
     "netlab-firewall",
     "netlab-netflow",
     "netlab-pcap-forensics",
+    "netlab-tls-inspect",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
