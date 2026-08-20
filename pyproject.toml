@@ -10,9 +10,67 @@ requires-python = ">=3.11"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Chris", email = "goabonga@pm.me" }]
+keywords = ["network-security", "training", "poc", "scapy", "blue-team", "red-team"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Education",
+    "Topic :: Security",
+]
 
 [tool.uv]
 package = false
 
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+netlab-core = { workspace = true }
+
 [dependency-groups]
+dev = [
+    "mypy>=1.18",
+    "pre-commit>=4.0",
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.15",
+    "scapy>=2.5",
+    "netlab-core",
+]
 doc = ["zensical", "markdown>=3.7"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = ["-ra", "--strict-config", "--strict-markers", "--import-mode=importlib"]
+testpaths = ["packages"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["packages"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "S", "PL", "RUF"]
+ignore = ["PLR2004", "S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["S", "PLR2004"]
+"scripts/**" = ["S", "PLR", "E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["packages"]
+exclude = ["(^|/)tests/"]
+explicit_package_bases = true
+
+[tool.bandit]
+skips = ["B404", "B603", "B607"]
+
+[[tool.mypy.overrides]]
+module = ["scapy.*"]
+ignore_missing_imports = true

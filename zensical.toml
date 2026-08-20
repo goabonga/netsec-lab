@@ -62,3 +62,4 @@ pymdownx.tilde = {}
 # as subtraction inside the Jinja `{{ ... }}` macro expression.
 [project.extra.versions]
 docs = "0.0.0"
+netlab_core = "0.0.0"
