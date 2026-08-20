@@ -14,6 +14,7 @@ members = [
     "netlab-dhcp",
     "netlab-discovery",
     "netlab-evil-twin",
+    "netlab-frag",
     "netlab-hw-implant",
     "netlab-icmp",
     "netlab-ipspoof",
@@ -685,6 +686,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-frag"
+version = "0.0.0"
+source = { editable = "packages/netlab-frag" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-hw-implant"
 version = "0.0.0"
 source = { editable = "packages/netlab-hw-implant" }
@@ -998,6 +1019,7 @@ dev = [
     { name = "netlab-dhcp" },
     { name = "netlab-discovery" },
     { name = "netlab-evil-twin" },
+    { name = "netlab-frag" },
     { name = "netlab-hw-implant" },
     { name = "netlab-icmp" },
     { name = "netlab-ipspoof" },
@@ -1035,6 +1057,7 @@ dev = [
     { name = "netlab-dhcp", editable = "packages/netlab-dhcp" },
     { name = "netlab-discovery", editable = "packages/netlab-discovery" },
     { name = "netlab-evil-twin", editable = "packages/netlab-evil-twin" },
+    { name = "netlab-frag", editable = "packages/netlab-frag" },
     { name = "netlab-hw-implant", editable = "packages/netlab-hw-implant" },
     { name = "netlab-icmp", editable = "packages/netlab-icmp" },
     { name = "netlab-ipspoof", editable = "packages/netlab-ipspoof" },
