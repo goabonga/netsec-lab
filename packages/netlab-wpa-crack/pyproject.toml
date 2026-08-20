@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Chris <goabonga@pm.me>
+
+[project]
+name = "netlab-wpa-crack"
+version = "0.0.0"
+description = "netsec-lab L1 PoC: WPA/WPA2 handshake & PMKID crack. Capture the 4-way handshake or PMKID and crack the PSK offline."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Chris", email = "goabonga@pm.me" }]
+keywords = ["network-security", "training", "poc", "wpa-crack"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Education",
+    "Topic :: Security",
+]
+dependencies = ["netlab-core"]
+
+[project.optional-dependencies]
+capture = ["scapy>=2.5"]
+
+[project.scripts]
+netlab-wpa-crack = "netlab_wpa_crack.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/goabonga/netsec-lab"
+Source = "https://github.com/goabonga/netsec-lab/tree/main/packages/netlab-wpa-crack"
+Issues = "https://github.com/goabonga/netsec-lab/issues"
+Changelog = "https://github.com/goabonga/netsec-lab/blob/main/packages/netlab-wpa-crack/CHANGELOG.md"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/netlab_wpa_crack"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/netlab_wpa_crack", "tests", "README.md", "CHANGELOG.md"]

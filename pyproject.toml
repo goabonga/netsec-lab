@@ -32,6 +32,7 @@ members = ["packages/*"]
 netlab-wifi-recon = { workspace = true }
 netlab-wifi-deauth = { workspace = true }
 netlab-evil-twin = { workspace = true }
+netlab-wpa-crack = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -45,6 +46,7 @@ dev = [
     "netlab-wifi-recon",
     "netlab-wifi-deauth",
     "netlab-evil-twin",
+    "netlab-wpa-crack",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]
