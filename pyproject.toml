@@ -46,6 +46,7 @@ netlab-ipv6-ra = { workspace = true }
 netlab-discovery = { workspace = true }
 netlab-lldp-med = { workspace = true }
 netlab-8021x = { workspace = true }
+netlab-macsec = { workspace = true }
 netlab-core = { workspace = true }
 
 [dependency-groups]
@@ -73,6 +74,7 @@ dev = [
     "netlab-discovery",
     "netlab-lldp-med",
     "netlab-8021x",
+    "netlab-macsec",
     "netlab-core",
 ]
 doc = ["zensical", "markdown>=3.7"]

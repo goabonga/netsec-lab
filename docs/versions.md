@@ -23,3 +23,4 @@ Released version of every netsec-lab component. Bumped by multicz on release.
 | `netlab-discovery` | {{ config.extra.versions.netlab_discovery }} |
 | `netlab-lldp-med` | {{ config.extra.versions.netlab_lldp_med }} |
 | `netlab-8021x` | {{ config.extra.versions.netlab_8021x }} |
+| `netlab-macsec` | {{ config.extra.versions.netlab_macsec }} |

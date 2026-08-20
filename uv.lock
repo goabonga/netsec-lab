@@ -18,6 +18,7 @@ members = [
     "netlab-ipv6-ra",
     "netlab-lldp-med",
     "netlab-macflood",
+    "netlab-macsec",
     "netlab-stp",
     "netlab-tap",
     "netlab-tempest",
@@ -762,6 +763,26 @@ requires-dist = [
 provides-extras = ["capture"]
 
 [[package]]
+name = "netlab-macsec"
+version = "0.0.0"
+source = { editable = "packages/netlab-macsec" }
+dependencies = [
+    { name = "netlab-core" },
+]
+
+[package.optional-dependencies]
+capture = [
+    { name = "scapy" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "netlab-core", editable = "packages/netlab-core" },
+    { name = "scapy", marker = "extra == 'capture'", specifier = ">=2.5" },
+]
+provides-extras = ["capture"]
+
+[[package]]
 name = "netlab-stp"
 version = "0.0.0"
 source = { editable = "packages/netlab-stp" }
@@ -939,6 +960,7 @@ dev = [
     { name = "netlab-ipv6-ra" },
     { name = "netlab-lldp-med" },
     { name = "netlab-macflood" },
+    { name = "netlab-macsec" },
     { name = "netlab-stp" },
     { name = "netlab-tap" },
     { name = "netlab-tempest" },
@@ -973,6 +995,7 @@ dev = [
     { name = "netlab-ipv6-ra", editable = "packages/netlab-ipv6-ra" },
     { name = "netlab-lldp-med", editable = "packages/netlab-lldp-med" },
     { name = "netlab-macflood", editable = "packages/netlab-macflood" },
+    { name = "netlab-macsec", editable = "packages/netlab-macsec" },
     { name = "netlab-stp", editable = "packages/netlab-stp" },
     { name = "netlab-tap", editable = "packages/netlab-tap" },
     { name = "netlab-tempest", editable = "packages/netlab-tempest" },
