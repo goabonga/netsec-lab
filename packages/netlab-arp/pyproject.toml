@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-arp"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: ARP spoofing. Poison the ARP cache to intercept LAN traffic."
 readme = "README.md"
 requires-python = ">=3.11"

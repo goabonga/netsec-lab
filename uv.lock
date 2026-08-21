@@ -598,7 +598,7 @@ wheels = [
 
 [[package]]
 name = "netlab-8021x"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-8021x" }
 dependencies = [
     { name = "netlab-core" },
@@ -618,7 +618,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-amplif"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-amplif" }
 dependencies = [
     { name = "netlab-core" },
@@ -638,7 +638,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-arp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-arp" }
 dependencies = [
     { name = "netlab-core" },
@@ -658,7 +658,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-bgp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-bgp" }
 dependencies = [
     { name = "netlab-core" },
@@ -692,7 +692,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-covert"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-covert" }
 dependencies = [
     { name = "netlab-core" },
@@ -712,7 +712,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-dhcp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-dhcp" }
 dependencies = [
     { name = "netlab-core" },
@@ -732,7 +732,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-discovery"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-discovery" }
 dependencies = [
     { name = "netlab-core" },
@@ -752,7 +752,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-dns"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-dns" }
 dependencies = [
     { name = "netlab-core" },
@@ -772,7 +772,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-dnstunnel"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-dnstunnel" }
 dependencies = [
     { name = "netlab-core" },
@@ -792,7 +792,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-evil-twin"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-evil-twin" }
 dependencies = [
     { name = "netlab-core" },
@@ -812,7 +812,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-firewall"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-firewall" }
 dependencies = [
     { name = "netlab-core" },
@@ -832,7 +832,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-frag"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-frag" }
 dependencies = [
     { name = "netlab-core" },
@@ -852,7 +852,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-hw-implant"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-hw-implant" }
 dependencies = [
     { name = "netlab-core" },
@@ -872,7 +872,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-icmp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-icmp" }
 dependencies = [
     { name = "netlab-core" },
@@ -892,7 +892,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-icmptunnel"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-icmptunnel" }
 dependencies = [
     { name = "netlab-core" },
@@ -912,7 +912,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-ids"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-ids" }
 dependencies = [
     { name = "netlab-core" },
@@ -932,7 +932,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-ids-evasion"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-ids-evasion" }
 dependencies = [
     { name = "netlab-core" },
@@ -952,7 +952,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-igmp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-igmp" }
 dependencies = [
     { name = "netlab-core" },
@@ -972,7 +972,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-ipspoof"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-ipspoof" }
 dependencies = [
     { name = "netlab-core" },
@@ -992,7 +992,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-ipv6-ra"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-ipv6-ra" }
 dependencies = [
     { name = "netlab-core" },
@@ -1012,7 +1012,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-kerberos-net"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-kerberos-net" }
 dependencies = [
     { name = "netlab-core" },
@@ -1032,7 +1032,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-lldp-med"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-lldp-med" }
 dependencies = [
     { name = "netlab-core" },
@@ -1052,7 +1052,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-macflood"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-macflood" }
 dependencies = [
     { name = "netlab-core" },
@@ -1072,7 +1072,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-macsec"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-macsec" }
 dependencies = [
     { name = "netlab-core" },
@@ -1092,7 +1092,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-macsec-monitor"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-macsec-monitor" }
 dependencies = [
     { name = "netlab-core" },
@@ -1112,7 +1112,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-mdns-llmnr"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-mdns-llmnr" }
 dependencies = [
     { name = "netlab-core" },
@@ -1132,7 +1132,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-netflow"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-netflow" }
 dependencies = [
     { name = "netlab-core" },
@@ -1152,7 +1152,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-ntp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-ntp" }
 dependencies = [
     { name = "netlab-core" },
@@ -1172,7 +1172,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-pcap-forensics"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-pcap-forensics" }
 dependencies = [
     { name = "netlab-core" },
@@ -1192,7 +1192,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-portscan"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-portscan" }
 dependencies = [
     { name = "netlab-core" },
@@ -1212,7 +1212,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-quic"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-quic" }
 dependencies = [
     { name = "netlab-core" },
@@ -1232,7 +1232,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-routing"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-routing" }
 dependencies = [
     { name = "netlab-core" },
@@ -1252,7 +1252,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-snmp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-snmp" }
 dependencies = [
     { name = "netlab-core" },
@@ -1272,7 +1272,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-stp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-stp" }
 dependencies = [
     { name = "netlab-core" },
@@ -1292,7 +1292,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-synflood"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-synflood" }
 dependencies = [
     { name = "netlab-core" },
@@ -1312,7 +1312,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-tap"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-tap" }
 dependencies = [
     { name = "netlab-core" },
@@ -1332,7 +1332,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-tcphijack"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-tcphijack" }
 dependencies = [
     { name = "netlab-core" },
@@ -1352,7 +1352,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-tempest"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-tempest" }
 dependencies = [
     { name = "netlab-core" },
@@ -1372,7 +1372,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-tls"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-tls" }
 dependencies = [
     { name = "netlab-core" },
@@ -1392,7 +1392,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-tls-inspect"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-tls-inspect" }
 dependencies = [
     { name = "netlab-core" },
@@ -1412,7 +1412,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-vlan"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-vlan" }
 dependencies = [
     { name = "netlab-core" },
@@ -1432,7 +1432,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-vrrp-hsrp"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-vrrp-hsrp" }
 dependencies = [
     { name = "netlab-core" },
@@ -1452,7 +1452,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-wifi-deauth"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-wifi-deauth" }
 dependencies = [
     { name = "netlab-core" },
@@ -1472,7 +1472,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-wifi-recon"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-wifi-recon" }
 dependencies = [
     { name = "netlab-core" },
@@ -1492,7 +1492,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-wpa-crack"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-wpa-crack" }
 dependencies = [
     { name = "netlab-core" },
@@ -1512,7 +1512,7 @@ provides-extras = ["capture"]
 
 [[package]]
 name = "netlab-wps-brute"
-version = "0.0.0"
+version = "0.1.0"
 source = { editable = "packages/netlab-wps-brute" }
 dependencies = [
     { name = "netlab-core" },

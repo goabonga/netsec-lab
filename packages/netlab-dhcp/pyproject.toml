@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-dhcp"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: DHCP snooping. Rogue DHCP server (MITM) and DHCP starvation against a pool."
 readme = "README.md"
 requires-python = ">=3.11"

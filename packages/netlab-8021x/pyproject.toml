@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-8021x"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: NAC bypass (802.1X). Bypass 802.1X network access control."
 readme = "README.md"
 requires-python = ">=3.11"

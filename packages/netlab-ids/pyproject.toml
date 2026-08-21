@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-ids"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Tooling PoC: IDS rule harness. Write Snort/Suricata rules and trigger them with the PoC traffic."
 readme = "README.md"
 requires-python = ">=3.11"

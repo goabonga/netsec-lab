@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-kerberos-net"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Services PoC: Kerberos on the wire. Capture/relay Kerberos tickets at the network level."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-snmp"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Services PoC: SNMP enumeration. Enumerate via weak community strings."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-amplif"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L4 PoC: Reflection & amplification. Measure the amplification factor (DNS/NTP/memcached) in-lab."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-icmptunnel"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Services PoC: ICMP tunneling. Exfiltrate in ICMP echo payloads (companion to the DNS tunnel)."
 readme = "README.md"
 requires-python = ">=3.11"

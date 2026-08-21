@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-quic"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Services PoC: QUIC / HTTP3 fingerprinting. Recon and inspection challenges of an encrypted UDP transport."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-tap"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L1 PoC: Passive network tapping. Intercept traffic by tapping the physical medium (copper or fibre)."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-pcap-forensics"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Tooling PoC: PCAP forensics. Reconstruct an attack from a capture (blue-team exercise)."
 readme = "README.md"
 requires-python = ">=3.11"

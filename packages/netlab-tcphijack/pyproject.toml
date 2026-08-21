@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-tcphijack"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L4 PoC: TCP session hijacking. Inject into / reset an established TCP session."
 readme = "README.md"
 requires-python = ">=3.11"

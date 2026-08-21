@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-firewall"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Tooling PoC: Firewall policy. nftables/iptables policy and validation that it blocks the PoC."
 readme = "README.md"
 requires-python = ">=3.11"

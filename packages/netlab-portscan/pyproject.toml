@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-portscan"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L4 PoC: Port scanning & fingerprinting. Scanning techniques and TCP/IP stack fingerprinting."
 readme = "README.md"
 requires-python = ">=3.11"

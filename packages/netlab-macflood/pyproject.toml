@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-macflood"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: MAC flooding (CAM overflow). Saturate the switch CAM table to force fail-open (hub) behaviour."
 readme = "README.md"
 requires-python = ">=3.11"

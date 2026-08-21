@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-tls"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Services PoC: TLS downgrade / MITM. SSL stripping, downgrade and proxy MITM."
 readme = "README.md"
 requires-python = ">=3.11"

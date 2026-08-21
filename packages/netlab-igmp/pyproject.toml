@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-igmp"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L3 PoC: IGMP snooping / spoofing. Manipulate multicast membership (forged join/leave)."
 readme = "README.md"
 requires-python = ">=3.11"

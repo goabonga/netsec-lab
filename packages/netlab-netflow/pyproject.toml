@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-netflow"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Tooling PoC: NetFlow / IPFIX analysis. Generate and analyze flows for behavioural detection."
 readme = "README.md"
 requires-python = ">=3.11"

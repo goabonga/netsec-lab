@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-mdns-llmnr"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Services PoC: mDNS/LLMNR/NBT-NS poisoning. Poison LAN name resolution (network dimension, on the wire)."
 readme = "README.md"
 requires-python = ">=3.11"

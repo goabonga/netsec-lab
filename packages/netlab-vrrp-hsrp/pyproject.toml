@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-vrrp-hsrp"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L3 PoC: FHRP takeover (VRRP/HSRP). Seize the master role of a redundant gateway."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-vlan"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: VLAN hopping. Escape your VLAN via DTP negotiation or 802.1Q double tagging."
 readme = "README.md"
 requires-python = ">=3.11"

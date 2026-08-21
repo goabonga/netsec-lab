@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-bgp"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L3 PoC: BGP hijack (simulated). Hijack a prefix in a lab AS mesh - flagship module."
 readme = "README.md"
 requires-python = ">=3.11"

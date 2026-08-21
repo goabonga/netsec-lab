@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-tempest"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L1 PoC: TEMPEST / Van Eck emanations. Reconstruct data from unintended electromagnetic emanations."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-wifi-deauth"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L1 PoC: 802.11 deauthentication. Forge deauth/disassoc frames to drop clients or force handshakes."
 readme = "README.md"
 requires-python = ">=3.11"

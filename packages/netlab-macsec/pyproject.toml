@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-macsec"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: MACsec / MKA. The \"TLS of Layer 2\": point-to-point encryption + integrity."
 readme = "README.md"
 requires-python = ">=3.11"

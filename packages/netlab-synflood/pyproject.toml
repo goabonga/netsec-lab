@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-synflood"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L4 PoC: TCP SYN flood. Exhaust the connection table with half-open connections."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-discovery"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: CDP/LLDP enumeration. Map and spoof topology via CDP/LLDP."
 readme = "README.md"
 requires-python = ">=3.11"

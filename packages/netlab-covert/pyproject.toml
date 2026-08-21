@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-covert"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L4 PoC: Covert channels. Generic covert channels in header fields and timing."
 readme = "README.md"
 requires-python = ">=3.11"

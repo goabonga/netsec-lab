@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-ids-evasion"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L4 PoC: NIDS evasion (insertion/evasion). Ptacek-Newsham techniques: insertion/evasion, TCP desync - flagship."
 readme = "README.md"
 requires-python = ">=3.11"

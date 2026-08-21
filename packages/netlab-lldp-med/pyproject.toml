@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-lldp-med"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: LLDP-MED abuse. Abuse LLDP-MED to spoof the voice VLAN / PoE policy."
 readme = "README.md"
 requires-python = ">=3.11"

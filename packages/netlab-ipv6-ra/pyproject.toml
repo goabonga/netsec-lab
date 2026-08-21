@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-ipv6-ra"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L2 PoC: Rogue Router Advertisement (IPv6). The IPv6 equivalent of rogue DHCP: forge RA/SLAAC messages."
 readme = "README.md"
 requires-python = ">=3.11"

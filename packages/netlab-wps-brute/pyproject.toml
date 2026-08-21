@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-wps-brute"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab L1 PoC: WPS PIN brute force. Recover the WPA PSK via the WPS PIN (online brute or Pixie-Dust)."
 readme = "README.md"
 requires-python = ">=3.11"

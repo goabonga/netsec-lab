@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-dnstunnel"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Services PoC: DNS tunneling. Exfiltrate data encoded in DNS queries."
 readme = "README.md"
 requires-python = ">=3.11"

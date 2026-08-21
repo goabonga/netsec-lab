@@ -3,7 +3,7 @@
 
 [project]
 name = "netlab-macsec-monitor"
-version = "0.0.0"
+version = "0.1.0"
 description = "netsec-lab Tooling PoC: MACsec posture check. Audit MACsec posture (encrypted vs cleartext links) on a segment."
 readme = "README.md"
 requires-python = ">=3.11"
