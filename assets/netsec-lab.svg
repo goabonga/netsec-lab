@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  SPDX-License-Identifier: MIT
+  Copyright (c) 2026 Chris <goabonga@pm.me>
+
+  netsec-lab master logo. Regenerate the derived assets
+  (docs/netsec-lab.svg, docs/favicon.ico) with `scripts/regen-icons.sh`
+  after editing.
+
+  A shield holds a small network topology: one root node wired down to a
+  meshed pair and a leaf. It reads as "the network stack, defended" - the
+  layered PoC (L1-L4 + services) that every module attacks, detects, and
+  defends. The cyan palette matches the docs theme.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Rounded shell -->
+  <rect x="16" y="16" width="224" height="224" rx="52" fill="#00838F"/>
+  <rect x="34" y="34" width="188" height="188" rx="40" fill="#00BCD4"/>
+  <!-- Shield -->
+  <path d="M128 66 L182 88 L182 132 C182 170 128 194 128 194 C128 194 74 170 74 132 L74 88 Z" fill="#FFFFFF"/>
+  <!-- Network topology inside the shield -->
+  <g stroke="#00838F" stroke-width="8" stroke-linecap="round">
+    <line x1="128" y1="102" x2="106" y2="138"/>
+    <line x1="128" y1="102" x2="150" y2="138"/>
+    <line x1="106" y1="138" x2="150" y2="138"/>
+    <line x1="106" y1="138" x2="128" y2="168"/>
+    <line x1="150" y1="138" x2="128" y2="168"/>
+  </g>
+  <g fill="#006064">
+    <circle cx="128" cy="102" r="12"/>
+    <circle cx="106" cy="138" r="11"/>
+    <circle cx="150" cy="138" r="11"/>
+    <circle cx="128" cy="168" r="11"/>
+  </g>
+</svg>
