@@ -1,8 +1,17 @@
-# netsec-lab
+<h1 align="center">
+  <img src="docs/netsec-lab.svg" alt="netsec-lab" width="120" /><br/>
+  netsec-lab
+</h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
-[![uv](https://img.shields.io/badge/managed%20by-uv-de5fe9.svg)](https://github.com/astral-sh/uv)
+<p align="center">
+  <em>Hands-on network-security training: layered attack / detect / defend PoC.</em>
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"/></a>
+  <a href="pyproject.toml"><img src="https://img.shields.io/badge/python-3.11%2B-blue.svg" alt="Python"/></a>
+  <a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/badge/managed%20by-uv-de5fe9.svg" alt="uv"/></a>
+</p>
 
 Hands-on **network security** training. Each topic is a self-contained proof of
 concept that walks the same three steps - **attack → detect → defend** - and
