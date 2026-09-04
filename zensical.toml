@@ -24,6 +24,16 @@ nav = [
     { "Versions" = "versions.md" },
 ]
 
+# Footer. `copyright` renders in the highlighted slot of
+# `partials/copyright.html`, above the theme's own attribution line;
+# `extra.generator = false` is the switch that partial reads to drop
+# that line, leaving this as the only footer text. Raw HTML, not
+# Markdown - the value is interpolated into the template as-is.
+copyright = """
+Made with <span style="color: #e25555;">&#10084;</span> by
+<a href="https://github.com/goabonga" target="_blank" rel="noopener">goabonga</a>
+"""
+
 # Declaring this table overrides zensical's DEFAULT_MARKDOWN_EXTENSIONS wholesale,
 # so the full default set is restored verbatim here (fenced code blocks need
 # pymdownx.superfences + pymdownx.highlight) and the `macros` extension is added.
@@ -57,6 +67,11 @@ pymdownx.tabbed.combine_header_slug = true
 pymdownx.tasklist.custom_checkbox = true
 pymdownx.tilde = {}
 "zensical.extensions.macros" = {}
+
+# Drop the theme's own generator credit from the footer so the
+# `copyright` line above is the only text there.
+[project.extra]
+generator = false
 
 # Per-component versions surfaced on docs/versions.md through the
 # `macros` extension ({{ config.extra.versions.* }}). multicz rewrites
