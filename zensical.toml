@@ -115,3 +115,11 @@ netlab_netflow = "0.1.0"
 netlab_pcap_forensics = "0.1.0"
 netlab_tls_inspect = "0.1.0"
 netlab_macsec_monitor = "0.1.0"
+
+# Branding. Both files are generated from `assets/netsec-lab.svg` by
+# `scripts/regen-icons.sh` and committed: the docs job builds the site
+# from the checked-in tree and never installs the `favicon` dep group.
+# Paths resolve relative to the docs dir.
+[project.theme]
+logo = "netsec-lab.svg"
+favicon = "favicon.ico"
