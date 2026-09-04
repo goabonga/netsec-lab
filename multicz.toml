@@ -30,6 +30,10 @@ types = ["fix"]
 title = "Performance"
 types = ["perf"]
 
+[[project.changelog_sections]]
+title = "Documentation"
+types = ["docs"]
+
 [components.docs]
 paths = ["docs/**", "zensical.toml"]
 depends_on = ["netlab-core", "netlab-wifi-recon", "netlab-wifi-deauth", "netlab-evil-twin", "netlab-wpa-crack", "netlab-wps-brute", "netlab-tap", "netlab-tempest", "netlab-hw-implant", "netlab-dhcp", "netlab-arp", "netlab-macflood", "netlab-stp", "netlab-vlan", "netlab-ipv6-ra", "netlab-discovery", "netlab-lldp-med", "netlab-8021x", "netlab-macsec", "netlab-ipspoof", "netlab-icmp", "netlab-frag", "netlab-routing", "netlab-igmp", "netlab-bgp", "netlab-vrrp-hsrp", "netlab-portscan", "netlab-synflood", "netlab-tcphijack", "netlab-amplif", "netlab-ids-evasion", "netlab-covert", "netlab-dns", "netlab-dnstunnel", "netlab-icmptunnel", "netlab-tls", "netlab-snmp", "netlab-ntp", "netlab-mdns-llmnr", "netlab-kerberos-net", "netlab-quic", "netlab-ids", "netlab-firewall", "netlab-netflow", "netlab-pcap-forensics", "netlab-tls-inspect", "netlab-macsec-monitor"]
@@ -37,6 +41,11 @@ changelog = "docs/CHANGELOG.md"
 bump_files = [
     { file = "zensical.toml", key = "project.extra.versions.docs" },
 ]
+# Merges into `[project.bump_rules]`: adds `docs` on top of the inherited
+# feat/fix/perf/revert. A `docs:` commit therefore bumps the site (patch)
+# and redeploys it, while the packages - which inherit the project rules
+# where `docs` is absent - stay untouched by a docs-only change.
+bump_rules = { docs = "patch" }
 
 [components.netlab-core]
 paths = ["packages/netlab-core/**"]
