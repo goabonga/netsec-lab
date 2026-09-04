@@ -3,6 +3,14 @@
 All notable changes to the documentation site.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.1.1] - 2026-09-04
+
+### Documentation
+
+- publish the netsec-lab logo and favicon on the site (`3ebb234`)
+- default the site to the dark cyan palette (`fc7a05e`)
+- replace the theme credit with a maintainer footer (`7c7b2fa`)
+
 ## [0.1.0] - 2026-08-21
 
 ### Added

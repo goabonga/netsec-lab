@@ -82,7 +82,7 @@ generator = false
 # NOTE: keys use underscores (netlab_dhcp, not netlab-dhcp) - a dash reads
 # as subtraction inside the Jinja `{{ ... }}` macro expression.
 [project.extra.versions]
-docs = "0.1.0"
+docs = "0.1.1"
 netlab_core = "0.0.0"
 netlab_wifi_recon = "0.1.0"
 netlab_wifi_deauth = "0.1.0"
