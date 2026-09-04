@@ -16,7 +16,11 @@ runs:
     - uses: astral-sh/setup-uv@v7
       with:
         enable-cache: true
-        cache-suffix: check
+        # Per-package suffix: every check job resolves the same frozen
+        # workspace, so a shared suffix makes all matrix legs race to
+        # reserve one identical cache key ("Unable to reserve cache").
+        # A distinct key per module lets each job own its own entry.
+        cache-suffix: check-${{ inputs.module }}
         python-version: "3.11"
     - shell: bash
       run: |
